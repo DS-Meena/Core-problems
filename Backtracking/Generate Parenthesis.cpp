@@ -27,7 +27,7 @@ void printParenthesis(int pos, int n, int open, int close)
 
     if (open < n)
     {
-        str[pos] = '{';
+        str[pos] = '{';         // backtracking as rewriting
         printParenthesis(pos + 1, n, open + 1, close);
     } 
     return;
