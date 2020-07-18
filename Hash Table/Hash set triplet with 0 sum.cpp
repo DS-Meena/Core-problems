@@ -12,23 +12,29 @@ int n ;
 
 void triplet0sum(int arr[])
 {
+    set<pair<int, pair<int,int>> > mycontainer;  //to remove duplicate triplets
+    
     for (int i = 0; i < n -  1; i++) {
         unordered_set <int > sat;
         for (int j = i + 1; j < n; j++) { 
 
-            int x = -(arr[i] + arr[j]); 
+            int dual = -(arr[i] + arr[j]); 
 
             if (sat.find(x) != sat.end()) {  
-
-                int tmp[] = {x, arr[i], arr[j]}; 
-                sort(tmp, tmp + 3);
-                for (int k = 0; k < 3; k++) cout << tmp[k] << " ";
-                cout << endl;
+                int triplet[] = {arr[i], arr[j], dual};
+                sort(triplet, triplet + 3);
+                
+                pair<int, pair<int,int>> x = make_pair(triplet[0], make_pair(triplet[1], triplet[2]));
+                mycontainer.insert(x);
             }
             else 
                 sat.insert(arr[j]);
         }
     }
+    for (auto i:mycontainer){
+        cout << i.first <<" " << i.second.first << " " << i.second.second << endl;
+    }
+    return;
 }
 
 void test_case()
