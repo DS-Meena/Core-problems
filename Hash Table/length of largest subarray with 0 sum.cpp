@@ -18,18 +18,18 @@ int sum0length(int arr[])
     
     for (int i = 0; i < n; i++){
         sum += arr[i];
-        if (sum == 0)
+        if (sum == 0)      // zeros are present in starting
         {
             if (maxLen < i)
                maxLen = i + 1;
         }
-        else if (table.find(sum) != table.end())  // if any element is 0
+        else if (table.find(sum) != table.end())  // in between elements sum is zero if exists
         {
             if (i - table[sum] > maxLen) 
                maxLen = i - table[sum];
         }
         else
-            table[sum] = i;
+            table[sum] = i;          // if not exists
     }  
     return maxLen;
 }
