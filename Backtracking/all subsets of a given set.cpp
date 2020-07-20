@@ -13,7 +13,8 @@ int s[3] = {1, 2, 3};
 
 void allSubsets(int pos, int len)
 {
-    static int subset[3];
+    static int subset[3];    
+    //or use static vector
     if (pos == 3)
     {   
         cout << " >> ";
