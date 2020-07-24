@@ -22,22 +22,23 @@ bool caninterleave(char* a, char* b, char* c)
     for (int i = 0; i <= m; i++){
         for(int j = 0; j <= n; j++) 
         {
-            if (i == 0 && j == 0) 
+            if (i == 0 && j == 0)    // 2 empty strings will interleave an empty string
                 interleave[i][j] = true;
 
-            else if (i == 0)
+            else if (i == 0)      // a empty
             {
                 if (b[j - 1] == c[j - 1])
                     interleave[i][j] = interleave[i][j - 1];
             }
 
-            else if (j == 0)
+            else if (j == 0)     // b empty
             {
                 if (a[i - 1] == c[i - 1])
                     interleave[i][j] = interleave[i - 1][j];
             }
-
-            else if (a[i - 1] == c[i + j - 1] && b[j - 1] != c[i + j - 1]) 
+            // x a[i-1] , y b[j-1], z c[i+j-1]
+            
+            else if (a[i - 1] == c[i + j - 1] && b[j - 1] != c[i + j - 1])   
                     interleave[i][j] = interleave[i - 1][j]; 
 
             else if (a[i - 1] != c[i + j - 1] && b[j - 1] == c[i + j - 1]) 
