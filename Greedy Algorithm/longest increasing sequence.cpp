@@ -21,7 +21,7 @@ int longestsequence(int arr[])
     for (int i =0; i < n; i++){    // counting the greater elements
         for (int j =0; j < n; j++)
         {
-            if(pile_top[j] < arr[i])
+            if(pile_top[j] < arr[i])    //place on smaller card
             {
                 pile_top[j] = arr[i];
                 pile_length[j] += 1;
