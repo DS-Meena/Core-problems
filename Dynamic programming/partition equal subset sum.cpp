@@ -25,9 +25,9 @@ bool canPartitioned(int arr[])
         for (int j = 0; j <= n ; j++)
         {
             if (i == 0)    // 0 sum is always possible
-                sums[0][i] = true; 
+                sums[i][j] = true; 
             else if (j == 0)       // not possible with empty set
-                sums[i][0] = false;      
+                sums[i][j] = false;      
             else
             {
                 sums[i][j] = sums[i][j - 1];
