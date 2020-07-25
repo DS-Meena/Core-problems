@@ -13,11 +13,10 @@ int n ;
 int longestsequence(int arr[])
 {
     int lis[n];
-    for (int i = 0; i < n; i++) 
-       lis[i] = 1;
     lis[0] = 1;
 
     for (int i = 0; i < n; i++){   // fix ending point
+        lis[i] = 1;
         for (int j = 0; j < i ; j++) 
         {
             if (arr[j] < arr[i])
@@ -25,7 +24,7 @@ int longestsequence(int arr[])
         }
     }  
     
-    int ans = 1;
+    int ans = 1;   // shortest inc sequence
     for (int i = 0; i < n; i++)  
         ans = max(ans, lis[i]);
     return ans;
