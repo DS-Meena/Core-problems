@@ -40,8 +40,7 @@ void test_case()
         {8, 2, 9, 5},
         {10, 0, 6, 8}
     };
-    m = sizeof(mat) / sizeof(mat[0]); 
-    n = sizeof(mat[0]) / sizeof(mat[0][0]);
+    m = 3, n = 4;   // 1 index destination
     cout << minCost(mat);
 
     cout << endl;
