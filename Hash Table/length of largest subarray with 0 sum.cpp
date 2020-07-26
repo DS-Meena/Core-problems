@@ -19,9 +19,8 @@ int sum0length(int arr[])
     for (int i = 0; i < n; i++){
         sum += arr[i];
         if (sum == 0)      // zeros are present in starting
-        {
-            if (maxLen < i)
-               maxLen = i + 1;
+        { 
+            maxLen = max(maxLen, i + 1);
         }
         else if (table.find(sum) != table.end())  // in between elements sum is zero if exists
         {
