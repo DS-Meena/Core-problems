@@ -25,8 +25,9 @@ int sum0length(int arr[])
         }
         else if (table.find(sum) != table.end())  // in between elements sum is zero if exists
         {
-            if (i - table[sum] > maxLen) 
-               maxLen = i - table[sum];
+            int old_indx = table[sum];
+            int curr_length = i - old_indx;
+            maxLen = max(maxLen, curr_length);
         }
         else
             table[sum] = i;          // if not exists
