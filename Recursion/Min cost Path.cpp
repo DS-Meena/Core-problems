@@ -12,9 +12,9 @@ int n, m;
 
 int minCost(int mat[][4], int i, int j)
 {
-    if (i == n && j == m) 
+    if (i == m && j == n) 
         return mat[i][j];
-    if (i > n || j > m)   // not choose this path
+    if (i > m || j > n)   // not choose this path
         return INT_MAX;
     
     int x = minCost(mat, i, j + 1);
@@ -32,9 +32,9 @@ void test_case()
         {8, 2, 9, 5},
         {10, 0, 6, 8}
     };
-    n = sizeof(mat) / sizeof(mat[0]); 
-    m = sizeof(mat[0]) / sizeof(mat[0][0]);
-    n--, m--;
+    // destination
+    m = 1, n = 3;
+    
     cout << minCost(mat, 0, 0);
 
     cout << endl;
