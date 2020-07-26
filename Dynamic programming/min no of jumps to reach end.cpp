@@ -12,23 +12,16 @@ int n, k;
 
 int minJumps(int arr[])
 {
-    int jumps[n];
-    jumps[0] = 0;
-
-    if (n == 0 || arr[0] == 0) 
-        return -1;
+    int minJump[n];
+    for (int i = 0; i < n; i++)  
+        minJump[i] = INT_MAX; 
+    minJump[0] = 0;
     
-    for (int i = 1; i < n; i++){
-        jumps[i] = INT_MAX;
-        for (int j = 0; j < i ; j++) 
-        {
-            if (i <= j + arr[j]) {
-                jumps[i] = min(jumps[i], jumps[j] + 1);    // min no of jumps to reach i
-                break;
-            }
-        }
-    } 
-    return jumps[n - 1];
+    for (int i = 0; i < n; i++){
+        for (int j = i + 1; j < min(i + arr[i] + 1, n); j++)
+               minJump[j] = min(minJump[j], 1 + minJump[i]);
+    }
+    return minJump[n - 1];
 }
 
 void test_case()
