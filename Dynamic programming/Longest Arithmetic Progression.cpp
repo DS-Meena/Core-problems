@@ -22,13 +22,13 @@ int longestAP(int arr[])
         int i = j - 1;
         int k = j + 1;
         while (i >= 0 && k <= n - 1){
-            if (arr[i] + arr[k] < 2 *  arr[j])
+            if (arr[i] + arr[k] < 2 *  arr[j])   // a + c < 2b
                 k++;
-            else if (arr[i] + arr[k] > 2 * arr[j]){
+            else if (arr[i] + arr[k] > 2 * arr[j]){    // a + c > 2b
                 dp[i][j] = 2;
                 i--;
             }
-            else {
+            else {                                 // a + c = 2b
                 dp[i][j] = dp[j][k] + 1;
                 longestAP = max(longestAP, dp[i][j]);
                 i--;
