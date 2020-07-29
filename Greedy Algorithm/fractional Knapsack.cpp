@@ -44,7 +44,7 @@ int maxprofit(int items[][2], int capacity)
         { 
             int availableSpace = capacity - currUsedWeight; 
             // taking the fraction
-            totalValue += arr[i].value*((double)availableSpace/arr[i].weight);
+            totalValue += arr[i].ratio * availableSpace;
             break;
         }
     }
