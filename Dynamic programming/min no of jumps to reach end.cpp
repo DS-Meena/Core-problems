@@ -15,12 +15,13 @@ int minJumps(int arr[])
     int minJump[n];
     for (int i = 0; i < n; i++)  
         minJump[i] = INT_MAX; 
-    minJump[0] = 0;
+    minJump[0] = 0; 
     
-    for (int i = 0; i < n; i++){
-        for (int j = i + 1; j < min(i + arr[i] + 1, n); j++)
-               minJump[j] = min(minJump[j], 1 + minJump[i]);
-    }
+    for (int i = 0; i< n; i++)
+    { 
+        for (int k = 1; k <= arr[i]; k++) 
+            jumps[i + k] = min(jumps[i + k], 1 + jumps[i]);
+    } 
     return minJump[n - 1];
 }
 
