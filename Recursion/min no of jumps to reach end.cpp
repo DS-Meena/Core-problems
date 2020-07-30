@@ -16,11 +16,9 @@ int minJumps(int arr[], int curr_pos)
        return 0;
     
     int minJump = INT_MAX;
-    int maxSteps = arr[curr_pos];
-    while(maxSteps > 0)
+    for (int k = 1; k <= arr[curr_pos]; k++)
     {
-        minJump = min(minJump, 1 + minJumps(arr, curr_pos + maxSteps));     // t(currPos) = n * T(currPos + maxSteps)
-        maxSteps--;
+        minJump = min(minJump, 1 + minJumps(arr, curr_pos + k));   // t(currPos) = n * T(currPos + maxSteps)
     }
     return minJump;
 }
