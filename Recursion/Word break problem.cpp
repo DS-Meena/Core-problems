@@ -30,8 +30,9 @@ bool canBreaked(string str)
 
     for (int i = 1; i <= curr_size; i++)
     {
-        if (dictionaryContains(str.substr(0, i)) &&
-            canBreaked(str.substr(i, curr_size - i)))
+        string prefix = str.substr(0, i);
+        string suffix = str.substr(i, curr_size - i);
+        if (dictionaryContains(prefix) && canBreaked(suffix))
             return true;
     }
     return false;
