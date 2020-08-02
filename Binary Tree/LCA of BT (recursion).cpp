@@ -31,13 +31,13 @@ Node *LCAncestor(Node *root, int node1, int node2)
     if (root->key == node1 || root->key == node2)
         return root;
 
-    Node *left = LCAncestor(root->left, node1, node2);
-    Node *right = LCAncestor(root->right, node1, node2);
+    Node *left_lca = LCAncestor(root->left, node1, node2);
+    Node *right_lca = LCAncestor(root->right, node1, node2);
 
-    if (left == NULL)
-        return right;
-    else if (right == NULL)
-        return left;
+    if (left_lca == NULL)
+        return right_lca;
+    else if (right_lca == NULL)
+        return left_lca;
     else
         return root;
 }
