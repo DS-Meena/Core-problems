@@ -36,12 +36,12 @@ bool pathExists(Node* root, int sum)
         int subSum = sum - root->key;
 
         if (subSum == 0 && root->left == NULL && root->right == NULL)
-            return 1;
+            ans = true;
 
-        if (root->left)
-            ans = ans || pathExists(root->left, subSum);
-        if (root->right)
-            ans = ans || pathExists(root->right, subSum);
+        if (root->left && pathExists(root->left, subSum))
+            ans = true;
+        if (root->right && pathExists(root->right, subSum))
+            ans = true;
 
         return ans;
     }
