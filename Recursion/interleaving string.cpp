@@ -49,12 +49,9 @@ bool checkinterleave(string s1, string s2, string s3, int i, int j, int k)
     if (k >= o) 
        return true;  
     
-    bool check1 = checkinterleave(s1, s2, s3, i + 1, j, k + 1);
-    bool check2 = checkinterleave(s1, s2, s3, i, j + 1, k + 1);
-    
-    if ((s1[i] == s3[k]) && check1)
+    if ((s1[i] == s3[k]) && checkinterleave(s1, s2, s3, i + 1, j, k + 1))
         return true;
-    else if ((s2[j] == s3[k]) && check2)
+    else if ((s2[j] == s3[k]) && checkinterleave(s1, s2, s3, i, j + 1, k + 1))
         return true;
     else 
         return false;
