@@ -20,9 +20,8 @@ int minCoins(int coins[], int A)
     { 
         if (coins[i] <= A)
         {
-            int curr_min = minCoins(coins, A - coins[i]);
-            if (min_c > 1 + curr_min && curr_min != INT_MAX)
-                min_c = curr_min + 1;
+            if (minCoins(coins, A - coins[i]) != INT_MAX)
+                min_c = min(min_c, 1 + minCoins(coins, A - coins[i]));
         }
     }
     return min_c;
