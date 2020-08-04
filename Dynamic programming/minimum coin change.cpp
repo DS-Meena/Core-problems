@@ -23,9 +23,8 @@ int minCoins(int c[], int A)
         for (int j = 0; j < n; j++){
             if (c[j] <= i)
             {
-                int curr_min = coinchange[i - c[j]];
-                if (curr_min != INT_MAX && curr_min + 1 < coinchange[i]) 
-                    coinchange[i] = curr_min + 1;
+                if (coinchange[i - c[j]] != INT_MAX) 
+                    coinchange[i] = min(coinchange[i], 1 + coinchange[i - c[j]]);
             }
         }
     }
