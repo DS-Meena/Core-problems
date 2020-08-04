@@ -39,10 +39,8 @@ void invertBT(node* root)
         Q.pop();
 
         swap(tmp->left, tmp->right);
-        if (tmp->left) 
-            Q.push(tmp->left);
-        if (tmp->right) 
-            Q.push(tmp->right);
+        if (tmp->left) Q.push(tmp->left);
+        if (tmp->right) Q.push(tmp->right);
     } 
 }
 
