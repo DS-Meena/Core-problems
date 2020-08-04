@@ -37,13 +37,10 @@ void invertBT(node* root)
     {
         node* tmp = S.top();
         S.pop();
-
-        if (tmp != NULL)
-        {
-            swap(tmp->left, tmp->right);
-            if (tmp->right) S.push(tmp->right);
-            if (tmp->left) S.push(tmp->left);
-        } 
+        
+        swap(tmp->left, tmp->right);
+        if (tmp->right) S.push(tmp->right);
+        if (tmp->left) S.push(tmp->left);
     }
 }
 
