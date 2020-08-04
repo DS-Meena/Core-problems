@@ -38,7 +38,7 @@ void ZigZagLT(node* root)
         {  
             vector<int> level;
             int size = Q.size();
-            for (int i = 0; i< size; i++)
+            for (int i = 0; i< size; i++)  // all nodes on that level
             {
                 node* tmp = Q.front();
                 Q.pop(); 
