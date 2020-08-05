@@ -35,13 +35,13 @@ void flatten(node* root)
 
     while(! S.empty())
     {
-        node* tmp = S.top();
+        node* tmp = S.top();                 // process root
         S.pop();
 
         if (tmp->right) S.push(tmp->right);  // process right
         if (tmp->left)  S.push(tmp->left);    // process left
         
-        if (!S.empty())                      // process root
+        if (!S.empty())                      
             tmp->right = S.top();
         
         tmp->left = NULL;
