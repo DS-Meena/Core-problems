@@ -12,16 +12,16 @@ int n, m;
 
 int minJumps(int arr[])
 {   
-    int previous = 0;
-    int current = 0;
+    int prev_limit = 0;
+    int curr_limit = 0;
     int jumps = 0;
     for (int i = 0; i < n; i++){
-        if (i > previous)
+        if (i > prev_limit)
         {
             jumps = jumps + 1;
-            previous = current;
+            prev_limit = curr_limit;
         }
-        current = max(current, i + arr[i]);
+        current = max(curr_limit, i + arr[i]);
     }
     return jumps;
 }
