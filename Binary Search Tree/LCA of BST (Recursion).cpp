@@ -37,15 +37,6 @@ node* insert(node* root, int data)
     return root;
 }
 
-void inOrder(node* root)
-{
-    if (! root) 
-        return ; 
-    inOrder(root->left);
-    cout << root->key << " ";
-    inOrder(root->right);
-}
-
 int LCA(node* root, int node1, int node2)
 {
     if (node1 > root->key && node2 > root->key)        //both greater
