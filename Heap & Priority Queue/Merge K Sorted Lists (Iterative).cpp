@@ -1,0 +1,127 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+#define endl "\n"
+
+const int N = 100; 
+const int mod = 1e9 + 7;
+
+int n, m, k;
+
+struct node{
+    int key;
+    node* next;
+};
+
+node* newnode(int data)
+{
+    node* NN = new node;
+    NN->key = data;
+    NN->next = NULL;
+    return NN;
+}
+
+node* mergeKSL(node* arr[])
+{
+    vector <int> comb;
+    for (int i = 0; i < n; i++)  //combined list
+    {
+        node* tmp = arr[i];
+        while(tmp){
+            comb.push_back(tmp->key);
+            tmp = tmp->next;
+        }
+    }
+
+    sort(comb.begin(), comb.end());
+
+    node* head = NULL;
+    for (int i = comb.size() - 1; i >= 0; i--){  //new linked list
+        node *temp = new node;
+        temp->key = comb[i];
+        temp->next = head;
+        head = temp;
+    }
+    
+    return head;
+}
+
+void test_case()
+{
+    n = 3;
+    node* arr[n];
+
+    arr[0] = newnode(1);
+    arr[0]->next = newnode(4); 
+    arr[0]->next->next = newnode(5); 
+    arr[0]->next->next->next = newnode(7); 
+
+    arr[1] = newnode(0);
+    arr[1]->next = newnode(9);
+    arr[1]->next->next = newnode(10);
+
+    arr[2] = newnode(2);
+    arr[2]->next = newnode(3);
+    arr[2]->next->next = newnode(6); 
+    arr[2]->next->next->next = newnode(8); 
+
+    node* ans = mergeKSL(arr); 
+    while(ans){
+        cout << ans->key << " ";
+        ans = ans->next;
+    }
+    
+    cout << endl;
+    return;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void solve()
+{
+    int t;
+    t = 1;
+    // cin >> t;
+    for (int nr = 1; nr <= t; nr++)
+    {
+        test_case();
+    }
+}
+
+int main()
+{   
+    // freopen("input.txt", "r", stdin);
+    // freopen("output.txt", "w", stdout);
+    //synchronize c++ streams with c streams
+    ios_base::sync_with_stdio(false);
+    //guarentes flushing
+    cin.tie(NULL);
+    cout.tie(NULL);
+    solve();
+}
