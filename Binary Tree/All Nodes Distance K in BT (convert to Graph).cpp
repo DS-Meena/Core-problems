@@ -60,15 +60,15 @@ void bfs(int target, int k)  // level order
     {
         depth += 1;
         int q_size = q.size();
-        for (int i = 0; i< q_size; i++)
+        for (int i = 0; i< q_size; i++)    // all nodes on the same level
         {
             int curr_node = q.front();
             visited[curr_node] = true; 
             q.pop();
 
-            for (int neighbour : graph[curr_node])
+            for (int neighbour : graph[curr_node])   // for all neighbours
             {
-                if (! visited.count(neighbour)) {
+                if (! visited.count(neighbour)) {     // if not visited
                     if (depth == k)  
                         ans.push_back(neighbour);
                     else 
