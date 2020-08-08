@@ -23,30 +23,30 @@ bool dictionaryContains(string word)
 
 bool canBreaked(string str)
 {
-    int curr_size = str.length();  // size keeps changing 
+    int curr_size = str.length();  
 
     if (curr_size == 0)
         return true;
     
-    bool dp[curr_size + 1];    // true if dp[i - 1] can be breaked
-    memset(dp, 0, sizeof(dp));
+    bool contains[curr_size + 1];                          
+    memset(contains, 0, sizeof(contains));
 
     for (int i = 1; i <= curr_size; i++)
     {
-        if (dictionaryContains(str.substr(0, i)) &&
-            dp[i] == false)
-            dp[i] = true;
+        if (dictionaryContains(str.substr(0, i)) &&   // check prefix if not checked before
+            contains[i] == false)
+            contains[i] = true;
 
-        if (dp[i] == true)   // i th can be breaked
+        if (contains[i] == true)                          // if contains prefix
         {
             if (i == curr_size)
                 return true;
-            for (int j = i + 1; j <= curr_size; j++)  // check sub parts
+            for (int j = i + 1; j <= curr_size; j++)  // check all suffixes
             {
-                if (dp[j] == false && dictionaryContains(str.substr(i, j - i))) 
-                    dp[j] = true;
+                if (contains[j] == false && dictionaryContains(str.substr(i, j - i))) 
+                    contains[j] = true;
                 
-                if (j == curr_size && dp[j] == true) 
+                if (j == curr_size && contains[j] == true) 
                     return true;
             }
         }
