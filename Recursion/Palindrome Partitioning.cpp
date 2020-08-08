@@ -12,7 +12,7 @@ int n, m;
 
 bool isPalindrome(string s, int i, int j)   
 {
-    while(i <= j)
+    while(j > i)
     {
         if (s[i] != s[j]) 
             return false;
@@ -21,16 +21,20 @@ bool isPalindrome(string s, int i, int j)
     return true;
 }
 
-int minCuts(string s, int i, int j)     /// similar to matrix chain multiplication
+int minCuts(string s)     /// similar to matrix chain multiplication
 {
-    if (i == j || isPalindrome(s, i, j))  // for each substring check palindrome
+    int size = s.length();
+    if (size == 0 || isPalindrome(s, 0, size - 1))  // for each substring check palindrome
         return 0;
     
     int min_cuts = INT_MAX;
-    for (int k = i; k < j; k++)
+    for (int i = 1; i < size; i++)
     {
-        int curr_cuts = minCuts(s, i, k) + minCuts(s, k + 1, j) + 1;
-        min_cuts = min(min_cuts, curr_cuts);
+        string prefix = s.substr(0, i);
+        string suffix = s.substr(i, size - i);
+
+        int cuts = 1 + minCuts(prefix) + minCuts(suffix);
+        min_cuts = min(min_cuts, cuts);
     }         
     return min_cuts;
 }
@@ -39,7 +43,7 @@ void test_case()
 {
     string s = "geek";
     n = s.length();
-    cout << minCuts(s, 0, n - 1) ;
+    cout << minCuts(s) ;
 
     cout << endl;
     return;
