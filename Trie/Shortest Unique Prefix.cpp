@@ -27,17 +27,14 @@ trieNode* newTrieNode(){
 
 void insert(trieNode* root, string s)
 {
-    int len = s.length();
-    trieNode* p = root;
-
-    for (int level = 0; level < len; level++)
+    for (int level = 0; level < s.length(); level++)
     {
-        int indx = s[level];
-        if (! p->child[indx]) 
-            p->child[indx] = newTrieNode();
+        int indx = s[level];        // char to int
+        if (! root->child[indx]) 
+            root->child[indx] = newTrieNode();
         else 
-            p->child[indx]->freq += 1;
-        p = p->child[indx];
+            root->child[indx]->freq += 1;
+        root = root->child[indx];
     }
 }
 
@@ -46,9 +43,9 @@ void findPrefixes(trieNode* root, char prefix[], int ind)
     if (root == NULL) 
        return;
     
-    if (root->freq == 1) 
+    if (root->freq == 1)     // print upto freq 1
     {
-        prefix[ind] = '\0';
+        prefix[ind] = '\0';     
         cout << prefix << " ";
         return;
     }
