@@ -21,19 +21,19 @@ bool isPalindrome(string s, int i, int j)
     return true;
 }
 
-int minCuts(string s)     /// similar to matrix chain multiplication
+int minCuts(string s, int i, int j)     /// similar to matrix chain multiplication
 {
-    int size = s.length();
-    if (size == 0 || isPalindrome(s, 0, size - 1))  // for each substring check palindrome
+    if (i == j || isPalindrome(s, i, j))  // for each substring check palindrome
         return 0;
     
     int min_cuts = INT_MAX;
-    for (int i = 1; i < size; i++)
+    for (int k = i; k < j; k++)
     {
-        string prefix = s.substr(0, i);
-        string suffix = s.substr(i, size - i);
-
-        int cuts = 1 + minCuts(prefix) + minCuts(suffix);
+        int cuts = minCuts(s, i, k) + minCuts(s, k + 1, j) + 1;
+        
+        // string prefix = s.substr(0, i);             // by using prefix and suffix
+        // string suffix = s.substr(i, size - i);      
+        //int cuts = 1 + minCuts(prefix) + minCuts(suffix);
         min_cuts = min(min_cuts, cuts);
     }         
     return min_cuts;
@@ -43,7 +43,7 @@ void test_case()
 {
     string s = "geek";
     n = s.length();
-    cout << minCuts(s) ;
+    cout << minCuts(s, 0, n - 1) ;
 
     cout << endl;
     return;
