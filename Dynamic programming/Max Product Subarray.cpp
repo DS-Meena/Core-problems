@@ -14,8 +14,8 @@ int maxPSArray(int arr[])
 {
     int max_product[n];
     max_product[0] = arr[0];
-    int imax = arr[0];    // max so far
-    int imin = arr[0];    // min so far
+    int imax = arr[0];    // max ending here
+    int imin = arr[0];    // min ending here
 
     for (int i = 1; i < n; i++) 
     { 
