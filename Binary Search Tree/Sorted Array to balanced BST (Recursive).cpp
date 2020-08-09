@@ -39,7 +39,7 @@ void inOrder(node* root)
 
 node* SAToBST(int arr[], int start, int end)
 {
-    if (start > end || (start >= n && end >= n)) 
+    if (start > end || (start >= n && end >= n))  // or start > end will work
         return NULL;
     
     int mid = start + (end - start) / 2; 
@@ -55,7 +55,7 @@ void test_case()
     int arr[] = {1, 2, 3, 4, 5, 6};
     n = sizeof(arr) / sizeof(arr[0]);
 
-    node* root = SAToBST(arr, 0, n); 
+    node* root = SAToBST(arr, 0, n);  // 0 to n - 1 will work
     inOrder(root); 
 
     cout << endl;
