@@ -66,7 +66,7 @@ void test_case()
     insert(root, 34); 
     
     int c = 0;
-    kthLargest(root, c); 
+    kthLargest(root, c);   // or here &c and their *c also works fine
 
     cout << endl;
     return;
