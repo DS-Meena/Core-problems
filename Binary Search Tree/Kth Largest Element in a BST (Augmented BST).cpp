@@ -52,9 +52,9 @@ int KthLargest(node* root, int k)
         node* tmp = root;
         while(tmp)
         {
-            if (tmp->rightCount + 1 == k) 
+            if (tmp->rightCount == k - 1) 
                 return tmp->key;
-            else if (tmp->rightCount + 1 < k)
+            else if (tmp->rightCount < k - 1)
             {
                 k -= tmp->rightCount + 1;
                 tmp = tmp->left;
@@ -64,6 +64,10 @@ int KthLargest(node* root, int k)
         }
     }
     return -1;
+    // or recursive reverse inOrder while checking rightcount
+    // kthLargest(root->right);
+    // if (root->cright == k - 1) 
+    //     cout << root->key;  return;
 }
 
 void test_case()
