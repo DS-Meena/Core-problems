@@ -32,6 +32,19 @@ node* reverse(node* head)
     head->next->next = head;
     head->next = NULL;
     return restPart;
+    
+    //or iteratively , changing pointer directions
+    // node* curr = head;
+    // node *prev = NULL, *next = NULL;
+    // while(curr != NULL) 
+    // {
+    //     next = curr->next;
+    //     curr->next = prev;
+    //     prev = curr;
+    //     curr = next;
+    // }
+    // head = prev;
+    // return head;
 }
 
 node* reverseMtoN(node* head, int m, int n)
