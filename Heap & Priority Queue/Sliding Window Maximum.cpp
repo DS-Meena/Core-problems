@@ -25,7 +25,7 @@ void SWMax(int arr[], int k)
         if (arr[i - k] == window.top()) 
             window.pop();
         else 
-            to_drop.push(arr[i - k]);
+            to_drop.push(arr[i - k]);   // on always pushing also work fine
         
         while(! to_drop.empty() && to_drop.top() == window.top()) {  // both top matches
             window.pop();
