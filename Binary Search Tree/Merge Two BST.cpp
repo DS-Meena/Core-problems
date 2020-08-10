@@ -112,7 +112,7 @@ void mergeBST(node* root1, node* root2)
             {
                 cout << curr2->key << " ";
                 curr2 = curr2->right;
-                stk2.push(curr1);
+                stk1.push(curr1);
                 curr1 = NULL;
             } 
         }
