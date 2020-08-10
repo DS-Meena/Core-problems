@@ -10,38 +10,39 @@ const int mod = 1e9 + 7;
 
 int n, m;
 
+#define sum_pair pair<int, pair<int, int>>
+
 void kSmallestPair(int arr1[], int arr2[], int k)
 {
-    priority_queue < pair<int, pair<int, int>>, vector<pair<int, pair<int, int>>>, greater<pair<int, pair<int, int>>>> pq;
-    set <pair <int, int>> my_set;
+    priority_queue<sum_pair, vector<sum_pair>, greater<sum_pair>> minheap;
+    set<sum_pair> toCheck;
 
-    pq.push(make_pair(arr1[0] + arr2[0], make_pair(0, 0)));
-    my_set.insert(make_pair(0, 0));
+    sum_pair x = make_pair(arra[0] + arrb[0], make_pair(0, 0));
 
-    for (int count = 1; count <= k; count++) 
+    minheap.push(x);
+    toCheck.insert(x); 
+
+    for (int c = 1; c <= k; c++)
     {
-        pair<int, pair <int, int> > tmp = pq.top();
-        pq.pop();
+        sum_pair x, y;
+        x = minheap.top(); minheap.pop();  //exclude old smallest sum pair
+        
+        int i = x.second.first;
+        int j = x.second.second; 
 
-        int i = tmp.second.first;
-        int j = tmp.second.second;
+        cout << arra[i] << " " << arrb[j] << endl;
 
-        cout << arr1[i] << " " << arr2[j] << endl;
-
-        int sum = arr1[i + 1] + arr2[j + 1];
-        pair <int, int> tmp1 = make_pair(i + 1, j);
-
-        if (my_set.find(tmp1) == my_set.end()){
-            pq.push(make_pair(sum, tmp1));
-            my_set.insert(tmp1);
+        x = make_pair(arra[i + 1] + arrb[j], make_pair(i + 1, j));
+        y = make_pair(arra[i] + arrb[j + 1], make_pair(i, j + 1)); 
+        if (toCheck.find(x) == toCheck.end())  // if not present already
+        {
+            minheap.push(x);
+            toCheck.insert(x);
         }
-
-        sum = arr1[i] + arr2[j + 1];
-        tmp1 = make_pair(i, j + 1);
-
-        if (my_set.find(tmp1) == my_set.end()) {
-            pq.push(make_pair(sum, tmp1));
-            my_set.insert(tmp1);
+        if (toCheck.find(y) == toCheck.end())
+        {
+            minheap.push(y);
+            toCheck.insert(y);
         }
     }
 }
