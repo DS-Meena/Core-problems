@@ -25,13 +25,15 @@ node* newnode(int value)
     return NN; 
 }
 
-int minDepth(node* root, int curr_depth)
+int minDepth(node* root)
 {
-    if (root->left == NULL && root->right == NULL) 
-       return 1;
+    if (! root) 
+        return 0;
+    //if (root->left == NULL && root->right == NULL) 
+    //   return 1;
      
-    int left_depth = minDepth(root->left, curr_depth);
-    int right_depth = minDepth(root->right, curr_depth);
+    int left_depth = minDepth(root->left);
+    int right_depth = minDepth(root->right);
     
 
     return min(left_depth, right_depth) + 1;
@@ -45,7 +47,7 @@ void test_case()
     root->left->left = newnode(11);
     root->left->right = newnode(6);
 
-    cout << minDepth(root, 0);
+    cout << minDepth(root);
 
     cout << endl;
     return;
