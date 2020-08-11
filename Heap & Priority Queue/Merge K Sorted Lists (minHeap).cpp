@@ -39,7 +39,7 @@ node* mergeKSL(node* arr[])
     minHeap.push(arr[2]);
 
     node* head = NULL;
-    node* last;
+    node* tmp;       
     while(! minHeap.empty())
     {
         node* curr = minHeap.top();
@@ -48,12 +48,12 @@ node* mergeKSL(node* arr[])
             minHeap.push(curr->next);
 
         if (head == NULL){
-            head = curr;
-            last = curr;
+            head = curr;          // head = curr = tmp
+            tmp = curr;
         } 
         else {
-            last->next = curr;
-            last = curr;
+            tmp->next = curr;    // define list using tmp
+            tmp = curr;
         } 
     }
     return head;
