@@ -36,12 +36,12 @@ node* add_nodes(node* a, node* b)
         sum = sum % 10;
 
         if (curr == NULL){
-            curr = newnode(sum);
-            head = curr;
+            curr = newnode(sum);   // create first node
+            head = curr;           // make both same
         } 
         else {
-            curr->next = newnode(sum);
-            curr = curr->next;
+            curr->next = newnode(sum);    // first make next node
+            curr = curr->next;            // then move it forward
         } 
 
         a  = a->next;
