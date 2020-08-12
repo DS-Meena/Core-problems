@@ -29,10 +29,10 @@ int maxH(node* root)
 {
     if (root)
     {
-        int LmaxH = maxH(root->left);
-        int RmaxH = maxH(root->right); 
-        
-        return 1 + max(LmaxH, RmaxH);
+        int left_h = maxH(root->left);
+        int right_h = maxH(root->right);
+
+        return 1 + max(left_h, right_h)
     }
     return 0;
 }
@@ -42,13 +42,11 @@ int maxD(node* root)
     if (root == NULL) 
        return 0;
     
-    int LmaxH = maxH(root->left);
-    int RmaxH = maxH(root->right);
-    
-    int LmaxD = maxD(root->left);
-    int RmaxD = maxD(root->right);
+    int left_h = maxH(root->left);
+    int right_h = maxH(root->right);
+    int curr_d = 1 + left_h + right_h; 
 
-    return max(LmaxH + RmaxH + 1, max(LmaxD, RmaxD)); 
+    return max(curr_d, max(maxD(root->left), maxD(root->right)));
 }
 
 void test_case()
