@@ -49,6 +49,23 @@ bool isPalindrome(node* head)
 
 void test_case()
 {
+    // to convert an array into linked list
+    // just for fun
+    // node* head = NULL;
+    // node* curr = NULL;
+    // int arr[] = {1, 2, 2, 1}; n = sizeof(arr) / sizeof(arr[0]);
+
+    // for (int i = 0; i < n; i++){
+    //     if (! head){
+    //         curr = newnode(arr[i]);
+    //         head = curr;
+    //     }
+    //     else {
+    //         curr->next = newnode(arr[i]);
+    //         curr = curr->next;
+    //     }
+    // }
+    
     node* head = newnode(4);
     head->next = newnode(5);
     head->next->next = newnode(5);
