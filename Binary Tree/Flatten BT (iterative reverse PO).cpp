@@ -42,7 +42,7 @@ void flatten(node* root)
         if (tmp->left)  S.push(tmp->left);    // process left
         
         if (!S.empty())                      
-            tmp->right = S.top();
+            tmp->right = S.top();    // tmp.right = tmp.left and tmp.left = null
         
         tmp->left = NULL;
     } 
