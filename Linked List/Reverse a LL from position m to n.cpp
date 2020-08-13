@@ -73,13 +73,13 @@ node* reverseMtoN(node* head, int m, int n)
     node* revPart = reverse(revStart);
     if (revPrev)
     {
-        revPrev->next->next = revNext;
+        revPrev->next->next = revNext;    // both joining, first right part then left part
         revPrev->next = revPart;
     }
     else 
     {
         if (revNext) 
-            head->next = revNext;
+            head->next = revNext;       // only, right joining
         head = revPart;
     }
 
