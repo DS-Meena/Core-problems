@@ -33,9 +33,9 @@ void DARLoop(node* head)
     slow = slow->next;
     fast = fast->next->next;
     
-    while(fast && fast->next)
+    while(fast && fast->next)     //if No loop break
     {
-        if (slow == fast) 
+        if (slow == fast)          //if loop break
            break;
         slow = slow->next;
         fast = fast->next->next;
