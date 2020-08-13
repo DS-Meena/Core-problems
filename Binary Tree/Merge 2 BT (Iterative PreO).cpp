@@ -25,50 +25,36 @@ node* newnode(int data)
     return tmp;
 }
 
-struct nodepair{
-    node* first;
-    node* second;
-};
-
-node* mergeBT(node* root1, node* root2)
+node* mergeBT(node* a, node* b)
 {
-    if (! root1)  return root2;
-    if (! root2)  return root1;
+    if (! a)  return b;
+    if (! b)  return a;
     
-    stack< nodepair > S; 
-    nodepair NP;
-    NP.first = root1;
-    NP.second = root2;
-    S.push(NP);
+    stack <pair <node*, node*> > stk;
+    stk.push(make_pair(a, b));
 
-    while(! S.empty())
+    while(! stk.empty())
     {
-        nodepair curr = S.top();
-        S.pop();
+        pair <node*, node*> curr = stk.top();
+        stk.pop();
+        node* first = curr.first;
+        node* second = curr.second;
 
-        if (curr.first == NULL || curr.second == NULL) 
-            continue;
-        curr.first->key += curr.second->key;    // Process
+        if (first && second)   
+        {
+            first->key += second->key;
+            if (first->left && second->left)     // both has left child
+                stk.push(make_pair(first->left, second->left));
+            else if (! first->left) 
+                first->left = second->left;
+            if (first->right && second->right)   // both has right child
+                stk.push(make_pair(first->right, second->right));
+            else if (! first->right) 
+                first->right = second->right;
+        }
+    }
 
-        if (curr.first->left == NULL)           // left
-            curr.first->left = curr.second->left;
-        else {
-            nodepair tmp;
-            tmp.first = curr.first->left;
-            tmp.second  = curr.second->left;
-            S.push(tmp);
-        }  
-
-        if (curr.first->right == NULL)           // right
-            curr.first->right = curr.second->right;
-        else {
-            nodepair tmp;
-            tmp.first = curr.first->right;
-            tmp.second = curr.second->right;
-            S.push(tmp);
-        }     
-    } 
-    return root1;
+    return a;
 }
 
 void inOrder(node* root)
