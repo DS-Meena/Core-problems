@@ -9,7 +9,7 @@ const int N = 100;
 const int mod = 1e9 + 7;
 
 int n, m;
-#define MAX 256
+#define MAX 122              //max ascii value of alphabet 'z'
 #define MAX_WORD_LEN 500
 
 struct trieNode {    
@@ -29,7 +29,7 @@ void insert(trieNode* root, string s)
 {
     for (int level = 0; level < s.length(); level++)
     {
-        int indx = s[level];        // char to int
+        int indx = s[level];        // taking child as a integer
         if (! root->child[indx]) 
             root->child[indx] = newTrieNode();
         else 
@@ -38,22 +38,22 @@ void insert(trieNode* root, string s)
     }
 }
 
-void findPrefixes(trieNode* root, char prefix[], int ind)
+void findPrefixes(trieNode* root, char prefix[], int indx)
 {
     if (root == NULL) 
        return;
     
-    if (root->freq == 1)     // print upto freq 1
+    if (root->freq == 1)     // print upto freq 1 from root
     {
-        prefix[ind] = '\0';     
+        prefix[indx] = '\0';     
         cout << prefix << " ";
         return;
     }
     for (int i = 0; i< MAX; i++){
         if (root->child[i] != NULL)
         {
-            prefix[ind] = i;
-            findPrefixes(root->child[i], prefix, ind + 1); 
+            prefix[indx] = i;
+            findPrefixes(root->child[i], prefix, indx + 1); 
         }
     }
 }
