@@ -9,8 +9,6 @@ const int N = 100;
 const int mod = 1e9 + 7;
 
 int n, m;
-#define MAX 256
-#define MAX_WORD_LEN 500
 
 struct node{
     int key;
@@ -23,6 +21,7 @@ node* newnode(int data)
 {
     node* NN = new node;
     NN->key = data;
+    NN->rightCount = 0;   
     NN->left = NULL;
     NN->right = NULL;
     return NN;
@@ -36,7 +35,7 @@ node* insert(node* root, int data)
     if (data > root->key) 
     {
         root->right = insert(root->right, data);
-        root->rightCount++;   // no of nodes in right subtree
+        root->rightCount++;               // no of nodes in right subtree
     }
     else 
        root->left = insert(root->left, data);
@@ -49,14 +48,15 @@ int KthLargest(node* root, int k)
        return -1;
     if (root)
     {
+        k--;
         node* tmp = root;
         while(tmp)
         {
-            if (tmp->rightCount == k - 1) 
+            if (tmp->rightCount == k) 
                 return tmp->key;
-            else if (tmp->rightCount < k - 1)
+            else if (tmp->rightCount < k)
             {
-                k -= tmp->rightCount + 1;
+                k -= tmp->rightCount;   // without subtracting also works fine
                 tmp = tmp->left;
             }
             else 
@@ -64,10 +64,6 @@ int KthLargest(node* root, int k)
         }
     }
     return -1;
-    // or recursive reverse inOrder while checking rightcount
-    // kthLargest(root->right);
-    // if (root->cright == k - 1) 
-    //     cout << root->key;  return;
 }
 
 void test_case()
