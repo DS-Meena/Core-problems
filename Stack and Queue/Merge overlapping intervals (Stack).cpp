@@ -23,20 +23,18 @@ bool comp(interval a, interval b)
 void mergeIntervals(interval arr[])
 {
     stack <interval> stk;
-
-    sort(arr, arr + m, comp);
     stk.push(arr[0]);
 
     for (int i = 1; i < m; i++)
     {
         interval top = stk.top();
-
-        if (top.end < arr[i].start) 
-            stk.push(arr[i]);
-        else if (top.end < arr[i].end)
+        interval curr = arr[i];
+        if (top.end < curr.start) 
+            stk.push(curr);
+        else 
         {
-            top.end = arr[i].end;
             stk.pop();
+            top.end = max(top.end, curr.end);
             stk.push(top);
         }
     }
@@ -52,9 +50,8 @@ void mergeIntervals(interval arr[])
 
 void test_case()
 {
-    interval arr[] = { {1, 5}, {2, 3}, {4, 8}, {9, 10} };
-    m = sizeof(arr) / sizeof(arr[0]);
-    n = 2;
+    interval arr[] = { {1, 5}, {2, 3}, {4, 8}, {9, 10} }; m = sizeof(arr) / sizeof(arr[0]);
+    sort(arr, arr + m, comp);
 
     mergeIntervals(arr); 
     
