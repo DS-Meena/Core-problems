@@ -22,20 +22,19 @@ bool comp(interval a, interval b)
 
 void mergeIntervals(interval arr[])
 {
-    sort(arr, arr + m, comp);
     int indx = 0;
 
     for (int i = 1; i < m; i++)
     {
-        if (arr[indx].end >= arr[i].start)   //overlaps
+        if (arr[indx].end < arr[i].start)   
         {
-            arr[indx].end = max(arr[indx].end, arr[i].end);
-            arr[indx].start = min(arr[indx].start, arr[i].start);
+            indx++;                      //save the previous interval
+            arr[indx] = arr[i];
         }
         else 
         {
-            indx++;
-            arr[indx] = arr[i];
+            arr[indx].end = max(arr[indx].end, arr[i].end);
+            arr[indx].start = min(arr[indx].start, arr[i].start);
         }
     }
     
@@ -47,9 +46,8 @@ void mergeIntervals(interval arr[])
 
 void test_case()
 {
-    interval arr[] = { {1, 5}, {2, 3}, {4, 8}, {9, 10} };
-    m = sizeof(arr) / sizeof(arr[0]);
-    n = 2;
+    interval arr[] = { {1, 5}, {2, 3}, {4, 8}, {9, 10} }; m = sizeof(arr) / sizeof(arr[0]);
+    sort(arr, arr + m, comp);
 
     mergeIntervals(arr); 
     
