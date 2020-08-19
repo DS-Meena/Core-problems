@@ -12,13 +12,13 @@ int n, m, k;
 
 int merge(int arr[], int tmp[], int start, int mid, int end)
 {
-    int i = start;
-    int j = mid;
-    int k = start;
+    int i = start;    // first half
+    int j = mid;      // second half
+    int k = start; 
     int inversion_count = 0;
     while(i <= mid - 1 && j <= end)
     {
-        if (arr[i] < arr[j]) 
+        if (arr[i] < arr[j])      // add smaller to sorted list
             tmp[k++] = arr[i++];
         else 
         {
