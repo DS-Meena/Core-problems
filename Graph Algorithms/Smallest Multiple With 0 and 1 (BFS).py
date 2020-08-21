@@ -5,7 +5,7 @@ def getMinimumMultipleOfBinaryDigit(num):
     curr = '1'
     frontier.append(curr)
     while frontier:           # until frontier becomes empty
-        curr = frontier.pop()
+        curr = frontier.pop()  # check pop(0)
         remainder = int(curr) % num
         if remainder == 0:
             return curr
