@@ -23,7 +23,7 @@ def canFinish(numCourses, prerequisites):
         graph[x].append(y)
 
     for i in range(numCourses):
-        if  dfs(i, graph, visited, stack):   # if cycle found
+        if  visited[i] == False and dfs(i, graph, visited, stack):   # if cycle found
             print("cycle  found")
             return False
     return True
