@@ -18,7 +18,7 @@ void towerofHOnai(int n, char frompeg, char topeg, char auxpeg)
         return;
     }  
     towerofHOnai(n - 1, frompeg, auxpeg, topeg);
-    towerofHOnai(1, frompeg, topeg, auxpeg);
+    cout << "move topmost wheel from " << frompeg << " to " << topeg << endl;  // only two recursive calls
     towerofHOnai(n-1, auxpeg, topeg, frompeg);
 
 }
