@@ -41,7 +41,7 @@ bool solve(int board[9][9])
                         board[r][c] = 0;   // undo and keep going
                     }
                 } 
-                return false;
+                return false;             //backtrack
            }
        }
    } 
