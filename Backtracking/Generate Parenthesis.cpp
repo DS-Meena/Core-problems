@@ -37,6 +37,11 @@ void test_case()
 {  
     int n = 3;
     printParenthesis(0, n, 0, 0);
+    // or printParenthesis(0, 0, "") also works fine with
+    // if (open < n)
+    //     printParenthesis(open + 1, close, seq + "(");
+    // if (open > close) 
+    //     printParenthesis(open, close + 1, seq + ")")
     
     cout << endl;
     return;
