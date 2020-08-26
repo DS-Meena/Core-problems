@@ -17,7 +17,7 @@ class MinStack {
 
     void push(int x)          // push
     {
-        ll y = (long)x;
+        ll y = (long)x;       // without this also fine
         if (stack.empty()) {
             stack.push_back(y);
             minimum = y;
@@ -43,14 +43,12 @@ class MinStack {
     }
     int top()                // top 
     {
-        if (! stack.empty()){
-            if (stack.back() < minimum) 
-                return minimum;
-            else 
-                return stack.back();
-        }
-        else 
+        if (stack.empty()) 
             return -1;
+        
+        if (stack.back() < minimum) 
+            return minimum;
+        return stack.back();
     }
     int getMin()              // get Min 
     {
