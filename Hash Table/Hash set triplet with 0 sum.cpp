@@ -12,28 +12,30 @@ int n ;
 
 void triplet0sum(int arr[])
 {
-    set<pair<int, pair<int,int>> > mycontainer;  //to remove duplicate triplets
+    unordered_set <int> present;   //to remove duplicate triplets
+    set <pair<int, pair<int, int>> > ans;
     
-    for (int i = 0; i < n -  1; i++) {
-        unordered_set <int > sat;
-        for (int j = i + 1; j < n; j++) { 
+    for (int i = 0; i < n; i++) 
+    {
+        for (int j = i + 1; j < n; j++) 
+        {
+            int sum = -1 * (arr[i] + arr[j]);
+            if (present.find(sum) == present.end()) 
+                continue;
+            
+            int tmp[] = {arr[i], arr[j], sum}; 
+            sort(tmp, tmp + 3);
 
-            int dual = -(arr[i] + arr[j]); 
-
-            if (sat.find(x) != sat.end()) {  
-                int triplet[] = {arr[i], arr[j], dual};
-                sort(triplet, triplet + 3);
-                
-                pair<int, pair<int,int>> x = make_pair(triplet[0], make_pair(triplet[1], triplet[2]));
-                mycontainer.insert(x);
-            }
-            else 
-                sat.insert(arr[j]);
+            pair<int, pair<int, int>> x = make_pair(tmp[0], make_pair(tmp[1], tmp[2]));
+            ans.insert(x);
         }
+
+        present.insert(arr[i]);
     }
-    for (auto i:mycontainer){
-        cout << i.first <<" " << i.second.first << " " << i.second.second << endl;
-    }
+    
+    for (auto i : ans) 
+        cout << i.first << " " << i.second.first <<" " << i.second.second << endl;
+
     return;
 }
 
