@@ -14,7 +14,7 @@ bool isValid(string exp)
 {
     stack <char> stk;
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)     //also works fine in the simple way
     {
         if (exp[i] == '[' || exp[i] == '(' || exp[i] == '{')
             stk.push(exp[i]);
