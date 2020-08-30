@@ -12,31 +12,28 @@ int n, m, k;
 
 void printSOT(int mat[][4])
 {
-    int curr_row = 0, curr_col = 0;
+    int SR = 0, ER = n - 1, SC = 0, EC = n - 1;
 
-    while(curr_row < m && curr_col < n)
+    while (ER > SR && EC > SC)
     {
-        for (int i = curr_col; i < n; i++) 
-            cout << mat[curr_row][i] << " ";
-        
-        curr_row++;
-        for (int i = curr_row; i < m; i++) 
-            cout << mat[i][n - 1] << " ";
-        
-        n--;
-        if (curr_row < m)
-        {
-            for (int i = n - 1; i >= curr_col; i--) 
-                cout << mat[m - 1][i] << " ";
-            m--;
-        }
-        if (curr_col < n)
-        {
-            for (int i = m - 1; i >= curr_row; i--)
-                cout << mat[i][curr_col] << " ";
-            curr_col++;
-        }
+        for (int i = SC; i <= EC; i++) 
+            cout << mat[SR][i] << " ";
+        SR++; cout << endl;
+
+        for (int i = SR; i <= ER; i++) 
+            cout << mat[i][EC] << " ";
+        EC--;  cout << endl;
+
+        for (int i = EC; i >= SC; i--) 
+            cout << mat[ER][i] << " ";
+        ER--;   cout << endl;
+
+        for (int i = ER; i >= SR; i--) 
+            cout << mat[i][SC] << " ";
+        SC++;   cout << endl; 
     }
+
+    return;
 }
 
 void test_case()
