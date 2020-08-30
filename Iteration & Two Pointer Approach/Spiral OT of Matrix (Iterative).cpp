@@ -18,19 +18,19 @@ void printSOT(int mat[][4])
     {
         for (int i = SC; i <= EC; i++) 
             cout << mat[SR][i] << " ";
-        SR++; cout << endl;
+        SR++; 
 
         for (int i = SR; i <= ER; i++) 
             cout << mat[i][EC] << " ";
-        EC--;  cout << endl;
+        EC--;  
 
         for (int i = EC; i >= SC; i--) 
             cout << mat[ER][i] << " ";
-        ER--;   cout << endl;
+        ER--;   
 
         for (int i = ER; i >= SR; i--) 
             cout << mat[i][SC] << " ";
-        SC++;   cout << endl; 
+        SC++;   
     }
 
     return;
