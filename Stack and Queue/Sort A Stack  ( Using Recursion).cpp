@@ -9,7 +9,7 @@ const int N = 100;
 const int mod = 1e9 + 7;
 
 int n, m, k;
-
+                                                         // ampersand in both functions also works fine
 void sort_Stack_andInsert(stack<int> *input, int data)  // Bottom top approach
 {
     if ((*input).empty() || data < (*input).top()) {
