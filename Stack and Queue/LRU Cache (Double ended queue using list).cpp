@@ -12,8 +12,8 @@ int n, m, k;
 
 class LRUCache {
     public:
-        list <pair< int, int> > ls;
-        unordered_map <int, list <pair <int, int> > :: iterator> map;
+        list <pair< int, int> > ls;                     // FIFO i.e back() points to last i.e, least used
+        unordered_map <int, list <pair <int, int> > :: iterator> map;   // key and pointer to this key in ls
         int size;
 
         LRUCache(int capacity)
@@ -24,6 +24,7 @@ class LRUCache {
         {
             if (map.find(key) == map.end()) 
                 return -1;
+                                                   // destination, source list, pointer to this key in list
             ls.splice(ls.begin(), ls, map[key]);  // moves to front because recently used
             return map[key]->second;
         }
@@ -42,7 +43,7 @@ class LRUCache {
                 map.erase(d_key);
             }
             ls.push_front({key, value});
-            map[key] = ls.begin();
+            map[key] = ls.begin();                // inserting the pointer to this key
         }
 };
 
@@ -52,7 +53,7 @@ void test_case()
     cache.put(1, 1);
     cache.put(2, 2);
     cache.put(1, 3);
-    cout << cache.get(1) << endl;
+    cout << cache.get(1) << endl;  
     cache.put(3, 4);
     cache.put(4, 3);
     cout << cache.get(2) << endl;
