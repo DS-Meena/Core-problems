@@ -13,7 +13,7 @@ int n, m, k;
 void moveZTE(int arr[])
 {
     int j = 0;
-    for (int i = 0; i< n; i++) 
+    for (int i = 0; i< n; i++)   //while loop also workds fine
     {
         if (arr[i] != 0)
         {
