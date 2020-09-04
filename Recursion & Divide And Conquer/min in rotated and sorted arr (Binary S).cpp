@@ -10,7 +10,7 @@ const int mod = 1e9 + 7;
 
 int n, m, k;
 
-int smallestIRSA(int arr[], int low, int high)
+int smallestIRSA(int arr[], int low, int high)  //find peak with 3 conditions also works fine
 {
     while (low < high)
     {
