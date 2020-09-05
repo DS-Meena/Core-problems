@@ -12,25 +12,25 @@ int n, m, k;
 
 int merge(int arr[], int tmp[], int start, int mid, int end)
 {
-    int i = start;    // first half
-    int j = mid;      // second half
-    int k = start; 
+    int i = start;         // first half
+    int j = mid + 1;      // second half
+    int indx = start; 
     int inversion_count = 0;
-    while(i <= mid - 1 && j <= end)
+    while(i <= mid && j <= end)
     {
-        if (arr[i] < arr[j])      // add smaller to sorted list
-            tmp[k++] = arr[i++];
+        if (arr[i] < arr[j])         // add smaller to sorted list
+            tmp[indx++] = arr[i++];
         else 
         {
-            inversion_count += mid - i;
-            tmp[k++] = arr[j++];
+            inversion_count += mid + 1 - i;  //both parts are sorted in themselves
+            tmp[indx++] = arr[j++];         //hence other combinations with j also be inverted
         } 
     }
 
-    while(i <= mid - 1) 
-        tmp[k++] = arr[i++];
+    while(i <= mid) 
+        tmp[indx++] = arr[i++];
     while(j <= end) 
-        tmp[k++] = arr[j++];
+        tmp[indx++] = arr[j++];
     for (int i = start; i <= end; i++)
         arr[i] = tmp[i];
     return inversion_count;
@@ -44,7 +44,7 @@ int mergeSort(int arr[], int tmp[], int start, int end)
         int mid = start + (end - start) / 2;
         inversion_count += mergeSort(arr, tmp, start, mid);
         inversion_count += mergeSort(arr, tmp, mid + 1, end);
-        inversion_count += merge(arr, tmp, start, mid + 1, end);
+        inversion_count += merge(arr, tmp, start, mid, end);
     }
 
     return inversion_count;
