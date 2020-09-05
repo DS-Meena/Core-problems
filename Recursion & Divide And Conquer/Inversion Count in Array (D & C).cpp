@@ -9,16 +9,18 @@ const int N = 100;
 const int mod = 1e9 + 7;
 
 int n, m, k;
+int tmp[10];   //tmp stores sorted array
 
-int merge(int arr[], int tmp[], int start, int mid, int end)
+int merge(int arr[], int start, int mid, int end)
 {
     int i = start;         // first half
     int j = mid + 1;      // second half
     int indx = start; 
     int inversion_count = 0;
+    
     while(i <= mid && j <= end)
     {
-        if (arr[i] < arr[j])         // add smaller to sorted list
+        if (arr[i] < arr[j])         // add smaller to sorted list tmp
             tmp[indx++] = arr[i++];
         else 
         {
@@ -31,20 +33,20 @@ int merge(int arr[], int tmp[], int start, int mid, int end)
         tmp[indx++] = arr[i++];
     while(j <= end) 
         tmp[indx++] = arr[j++];
-    for (int i = start; i <= end; i++)
+    for (int i = start; i <= end; i++)   //copy the sorted array
         arr[i] = tmp[i];
     return inversion_count;
 }
 
-int mergeSort(int arr[], int tmp[], int start, int end)
+int mergeSort(int arr[], int start, int end)
 {
     int inversion_count = 0;
     if (start < end)
     {
         int mid = start + (end - start) / 2;
-        inversion_count += mergeSort(arr, tmp, start, mid);
-        inversion_count += mergeSort(arr, tmp, mid + 1, end);
-        inversion_count += merge(arr, tmp, start, mid, end);
+        inversion_count += mergeSort(arr, start, mid);
+        inversion_count += mergeSort(arr, mid + 1, end);
+        inversion_count += merge(arr, start, mid, end);
     }
 
     return inversion_count;
@@ -54,8 +56,7 @@ void test_case()
 {
     int arr[] = {4, 1, 3, 2};  n = sizeof(arr) / sizeof(arr[0]);
 
-    int tmp[n];
-    cout << mergeSort(arr, tmp, 0, n - 1);
+    cout << mergeSort(arr, 0, n - 1);
         
     cout << endl;
     return;
