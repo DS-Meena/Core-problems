@@ -14,7 +14,7 @@ int medianRWSM(int mat[][3])
 {
     int minn = INT_MAX;
     int maxx = INT_MIN;
-    int desired_count = 1 + (m * n) / 2 ;
+    int desired_count = 1 + (m * n) / 2 ;    //no of elements which should be <= to median
 
     for (int i = 0; i < m; i++)
     {
@@ -28,7 +28,7 @@ int medianRWSM(int mat[][3])
         counter = 0;
         int mid = minn + (maxx - minn) / 2;
         for (int i = 0; i < m; i++)
-            counter += upper_bound(mat[i], mat[i] + n, mid) - mat[i];
+            counter += upper_bound(mat[i], mat[i] + n, mid) - mat[i];   //no of elements in current row which are <= to mid
  
         if (counter < desired_count) 
             minn = mid + 1;
