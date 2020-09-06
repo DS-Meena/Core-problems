@@ -10,43 +10,51 @@ const int mod = 1e9 + 7;
 
 int n, m, k;
 
-int bounds[2];
-void FandLO(int arr[], int target)
+int lower_bound(int arr[], int low, int high)
 {
-    int start = 0, end = n - 1;
-    while(start < end)                    //first occurance & simple
+    while (low < high)
     {
-        int mid = start + (end - start) / 2;
-        if (target <= arr[mid]) 
-            end = mid;
+        int mid = (high - low) / 2 + low;
+        if (arr[mid] < k) 
+            low = mid + 1;
         else 
-            start = mid + 1;
-    }  
-    bounds[0] = start;
-    
-    start = start;
-    end = n - 1;
-    while (start < end)                   //last occurance
-    {
-        int mid = start + (end - start) / 2 + 1;
-        if (target < arr[mid]) 
-            end = mid - 1;
-        else 
-            start = mid;
+            high = mid;
     }
-    bounds[1] = end;
+
+    return low;
+} 
+
+int upper_bound(int arr[], int low, int high)
+{
+    while (low < high)
+    {
+        int mid = (high - low) / 2 + low + 1;
+        if (arr[mid] > k) 
+            high = mid - 1;
+        else 
+            low = mid;
+    }
+
+    return high;
+}
+
+void findrange(int arr[])
+{
+    int lo = lower_bound(arr, 0, n - 1);
+    int hi = upper_bound(arr, 0, n - 1);
     
-    if (arr[bounds[0]] != target) bounds[0] = -1;
-    if (arr[bounds[1]] != target) bounds[1] = -1;
-    return;
+    if (arr[lo] != k) 
+        cout << "-1" << " -1" << endl;
+    else 
+        cout << lo << " " << hi << endl;
 }
 
 void test_case()
 {
     int arr[] = {1, 3, 5, 5, 5, 5, 28, 37, 42};   n = sizeof(arr) / sizeof(arr[0]);
-
-    FandLO(arr, 5);
-    cout << bounds[0] << " " << bounds[1];
+    
+    k = 5;
+    findrange(arr);
         
     cout << endl;
     return;
