@@ -1,7 +1,7 @@
 
 def dfs(i, graph, visited, stack):
     visited[i] = True
-    stack[i] = True
+    stack[i] = True       # same as visited 
     for j in graph[i]:
         if visited[j] == False:
             if dfs(j, graph, visited, stack) == True:
@@ -9,7 +9,7 @@ def dfs(i, graph, visited, stack):
         elif stack[j] == True and j != i:
             return True
     
-    stack[i] = False
+    stack[i] = False     # just make it false after traversing neighbors
     return False
 
 def canFinish(numCourses, prerequisites):
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     n = 3
     prerequisite_Pairs = [[1, 0], [0, 2]]
 
-    if canFinish(n + 1, prerequisite_Pairs): 
+    if canFinish(n + 1, prerequisite_Pairs):   # n also works fine
         print("YES") 
     else:
         print("NO")
