@@ -2,7 +2,7 @@
 def dfs(u, adj, visited, stack):
     visited[u] = True
     stack[u] = True
-    for v in adj[u]:
+    for v in adj[u]:     # for all neighbors O(E)
         if visited[v] == False and dfs(v, adj, visited, stack):
             return True
         elif stack[v] == True and v != u:
@@ -23,7 +23,7 @@ def circularArrayLoop(nums, n):
     visited = [False] * n
     stack = [False] * n 
     # search for positive cycle
-    for i in range(n):
+    for i in range(n):             # for all vertices O(V)
         if visited[i] == 0 and dfs(i, adj1, visited, stack) == True:
             print(i)
             return True
@@ -31,7 +31,7 @@ def circularArrayLoop(nums, n):
     visited = [False] * n
     stack = [False] * n
     #search for negative cycle
-    for i in range(n):
+    for i in range(n):            # for all vertices O(V)
         if visited[i] == 0 and dfs(i, adj2, visited, stack) == True:
             print(i)
             return True
