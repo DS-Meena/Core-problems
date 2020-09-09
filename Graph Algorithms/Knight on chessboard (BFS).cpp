@@ -12,17 +12,18 @@ def minMoves(m, n, knightx, knighty, targetx, targety):
     moves = 0
     while frontier.empty() == False:
         size = frontier.qsize()
-        for _ in range(size):
+        for _ in range(size):               # for current level
             currx, curry = frontier.get() 
             visited.append((knightx, knighty))
 
-            for i in range(8):
+            for i in range(8):          # check all possible neighbors
                 newx = currx + x[i]
                 newy = curry + y[i]
 
-                if newx == targetx and newy == targety:
+                if newx == targetx and newy == targety:    # if this is target
                     return moves + 1
-
+                
+                # inside board and not yet visited
                 if 1<= newx and newx <= n and 1 <= newy and newy <= n and (newx, newy) not in visited:
                     frontier.put((newx, newy))
         
