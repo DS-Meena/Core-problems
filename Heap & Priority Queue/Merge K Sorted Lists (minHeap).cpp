@@ -48,11 +48,11 @@ node* mergeKSL(node* arr[])
             minHeap.push(curr->next);
 
         if (head == NULL){
-            head = curr;          // head = curr = tmp
+            head = curr;          // add first node
             tmp = curr;
         } 
         else {
-            tmp->next = curr;    // define list using tmp
+            tmp->next = curr;    // add next nodes, using tmp->next
             tmp = curr;
         } 
     }
