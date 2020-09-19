@@ -29,15 +29,15 @@ node* mergeLL(node* a, node* b)
     if (! b) return a;
 
     node* output = NULL;
-    if (a->key < b->key)
+    if (a->key < b->key)     // compare both list's node
     {
         output = a;
-        a->next = mergeLL(a->next, b);
+        output->next = mergeLL(a->next, b);   // if a is smaller, traverse forward in a
     }
     else 
     {
         output = b;
-        b->next = mergeLL(a, b->next);
+        output->next = mergeLL(a, b->next);   // if b is smaller, traverse forward in b
     }
     return output;
 }
