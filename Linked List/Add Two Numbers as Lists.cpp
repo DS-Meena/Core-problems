@@ -25,15 +25,15 @@ node* newnode(int data)
 
 node* add_nodes(node* a, node* b)
 {
-    node* head = NULL; 
+    node* head = NULL;   // for result list
     node* curr = NULL;
     int carry = 0;
 
     while (a && b)  
     {
-        int sum = a->key + b->key + carry;
-        carry = sum / 10;
-        sum = sum % 10;
+        int sum = a->key + b->key + carry;  // add both and carry
+        carry = sum / 10;                   // 1st digit
+        sum = sum % 10;                     // 2nd digit
 
         if (curr == NULL){
             curr = newnode(sum);   // create first node
@@ -49,7 +49,7 @@ node* add_nodes(node* a, node* b)
     }
     while(a)
     {
-        int sum = a->key + carry;
+        int sum = a->key + carry;    // add a and carry
         carry = sum / 10;
         sum = sum % 10;
 
@@ -59,7 +59,7 @@ node* add_nodes(node* a, node* b)
     }
     while(b)
     {
-        int sum = b->key + carry;
+        int sum = b->key + carry;    // add b and carry
         carry = sum / 10;
         sum = sum % 10;
 
@@ -67,7 +67,7 @@ node* add_nodes(node* a, node* b)
         curr = curr->next;
         b = b->next;
     } 
-    if (carry != 0)
+    if (carry != 0)             // only c
         curr->next = newnode(carry);
     
     return head;
