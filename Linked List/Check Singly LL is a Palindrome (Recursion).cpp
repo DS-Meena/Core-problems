@@ -23,17 +23,17 @@ node* newnode(int data)
     return NN;
 }
 
-bool isPalindrome(node** left, node* right)
+bool isPalindrome(node** left, node* right)     // &left so that left changes for all recursions
 {
     if (right == NULL)
         return true;
 
-    if (! isPalindrome(left, right->next))
+    if (! isPalindrome(left, right->next))      // traverse to end
         return false;
 
-    bool ans = (right->key == (*left)->key);
+    bool ans = (right->key == (*left)->key);   // compare left and right values
 
-    *left = (*left)->next;
+    *left = (*left)->next;                     // traverse toward the right
 
     return ans;
 }
