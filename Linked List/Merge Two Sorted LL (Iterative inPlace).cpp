@@ -29,7 +29,7 @@ node* mergeSLL(node* a, node* b)
     if (! b) return a;
 
     node* output = NULL;
-    if (a->key < b->key) {   //first node
+    if (a->key < b->key) {    // first iteration outside, for the first node
         output = a;
         a = a->next;
     }
@@ -39,9 +39,9 @@ node* mergeSLL(node* a, node* b)
     }
 
     node* curr = output;
-    while(a && b)          // remaining nodes
+    while(a && b)                 // while both list's nodes exists
     {
-        if (a->key < b->key) {
+        if (a->key < b->key) {   // compare and traverse forward in the smaller one
             curr->next = a;
             a = a->next;
         }
@@ -51,7 +51,7 @@ node* mergeSLL(node* a, node* b)
         }
         curr = curr->next;
     }
-    if (a) curr->next = a;
+    if (a) curr->next = a;      // if one list is still remaining to traverse
     if (b) curr->next = b;
 
     return output;
