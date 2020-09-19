@@ -28,9 +28,9 @@ node* reverse(node* head)
     if (! head || ! head->next)
         return head;
     
-    node* restPart = reverse(head->next);
-    head->next->next = head;
-    head->next = NULL;
+    node* restPart = reverse(head->next);  // strat from the last node 
+    head->next->next = head;             // next node's next to itself
+    head->next = NULL;                   // itself next to NULL
     return restPart;
     
     //or iteratively , changing pointer directions
@@ -52,39 +52,51 @@ node* reverseMtoN(node* head, int m, int n)
     if (m == n)
         return head;
     
-    int count = 1;
-    node* curr = head;
     node* revPrev = NULL;
-    while (count < m){          //find start pointers
-        revPrev = curr;
-        curr = curr->next;
-        count += 1;
-    }
-    node* revStart = curr;    
+    node* revStart = NULL;
+    node* revNext = NULL;
+    node* revEnd = NULL;
 
-    while(count < n) {         //find end pointers
-        curr = curr->next;
-        count += 1;
+    int indx = 1;
+    node* tmp = head;
+    while (tmp)     // find the starting and ending end
+    {
+        if (indx == m - 1) 
+            revPrev = tmp;
+        else if (indx == m) 
+            revStart = tmp;
+        else if (indx == n) 
+            revEnd = tmp;
+        else if (indx == n + 1) 
+            revNext = tmp;
+
+        indx++; 
+        tmp = tmp->next;
     }
-    node* revEnd = curr;
-    node* revNext = curr->next;
-    curr->next = NULL;
+
+    // make cuts at both ends
+    if (revPrev) revPrev->next = NULL;
+    if (revEnd)   revEnd->next = NULL;
     
-    node* revPart = reverse(revStart);
-    if (revPrev)
+    
+    // reverse m to n list
+    node* reverse_head = reverse(revStart);
+    tmp = reverse_head;
+  
+    // join the ending cut first, if exists
+    if (revNext) 
     {
-        revPrev->next->next = revNext;    // both joining, first right part then left part
-        revPrev->next = revPart;
+        while (tmp->next) tmp = tmp->next;
+        tmp->next = revNext;
     }
-    else 
-    {
-        if (revNext) 
-            head->next = revNext;       // only, right joining
-        head = revPart;
+    
+    // join the starting end, if exists
+    if (revPrev) {
+        revPrev->next = reverse_head;
+        return head;
     }
 
-    cout << revPrev->key << " " << revStart->key << " " << revEnd->key << " " << revNext->key << endl; 
-    return head;
+    return reverse_head;  // if not exists revPrev
 }
 
 void test_case()
