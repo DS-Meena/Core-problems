@@ -25,18 +25,16 @@ node* newnode(int data)
 
 void DARLoop(node* head)
 {
-    if (! head || ! head->next) 
+    if (! head || ! head->next)     
         return;
 
     node *slow = head, *fast = head;
 
-    slow = slow->next;
+    slow = slow->next;                        // place slow 2nd and 3rd node
     fast = fast->next->next;
     
-    while(fast && fast->next)     //if No loop break
+    while(fast && fast->next && slow != fast)     // while slow != fast and fast, fast->next exists
     {
-        if (slow == fast)          //if loop break
-           break;
         slow = slow->next;
         fast = fast->next->next;
     }
