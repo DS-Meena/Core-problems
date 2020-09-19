@@ -28,9 +28,9 @@ void DARLoop(node* head)
     if (! head || ! head->next)     
         return;
 
-    node *slow = head, *fast = head;
+    node *slow = head, *fast = head;          // initialize slow and fast as head
 
-    slow = slow->next;                        // place slow 2nd and 3rd node
+    slow = slow->next;                        // do first iteration outside, for equal condition
     fast = fast->next->next;
     
     while(fast && fast->next && slow != fast)     // while slow != fast and fast, fast->next exists
@@ -42,12 +42,12 @@ void DARLoop(node* head)
 
     if (slow == fast)   // if loop exists
     {
-        slow = head;
-        while (slow->next != fast->next){
+        slow = head;                                // set slow as head
+        while (slow->next != fast->next){           // until next of slow and fast becomes same
             slow = slow->next;
             fast = fast->next;
         }
-        fast->next = NULL;
+        fast->next = NULL;                           // make next of fast as NULL
     }
     return;
 }
