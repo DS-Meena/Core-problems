@@ -25,17 +25,17 @@ node* newnode(int data)
 
 node* sortedInsert(node* sorted_head, node* new_node)
 {
-    if (! sorted_head || sorted_head->key >= new_node->key)
+    if (! sorted_head || sorted_head->key >= new_node->key)    // if sorted list is empty or head is larger than curr node
     {
-        new_node->next = sorted_head;
+        new_node->next = sorted_head;                          // add in the starting
         return new_node;
     }
     else 
     {
         node* curr = sorted_head;
-        while(curr->next && curr->next->key < new_node->key)
+        while(curr->next && curr->next->key < new_node->key)   // otherwise traverse and find the correct position
             curr = curr->next;
-        new_node->next = curr->next;
+        new_node->next = curr->next;                          // add new node in the correct position
         curr->next = new_node;
     }
     return sorted_head;
@@ -44,11 +44,11 @@ node* sortedInsert(node* sorted_head, node* new_node)
 node* IsortLL(node* head)
 {
     node* curr = head;
-    node* sorted_head = NULL;
-    while(curr)
+    node* sorted_head = NULL;         // create a sorted list, initially null
+    while(curr)                       // traverse the given list
     {
-        node* currNext = curr->next;
-        sorted_head = sortedInsert(sorted_head, curr);
+        node* currNext = curr->next;                       // for the traversal
+        sorted_head = sortedInsert(sorted_head, curr);     // add the curr next in the sorted list
         curr = currNext;
     }
 
