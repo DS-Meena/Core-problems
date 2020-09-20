@@ -28,23 +28,28 @@ node* removeFE(node* head, int k)
     node* fast = head;
     node* slow = head;
     
-    for (int i = 0; i < k; i++)
+    for (int i = 0; i < k; i++)    // make the required gap
     {
-        if (fast->next == NULL)    // k <= length of LL
+        // if fast reaches to end means, k >= lenght
+        if (fast->next == NULL)    
         {
-            if (i == k - 1)  
-                head = head->next;
-            return head;
+            if (i == k - 1)            // if k == length
+                head = head->next;    // remove the head
+            return head;             
         }
         fast = fast->next;
     }
-
-    while(fast->next != NULL) {
-        slow = slow->next;
+    
+    // while 2nd pointer reaches to the end
+    while(fast->next != NULL) 
+    {
+        slow = slow->next;       // move both forward
         fast = fast->next;
     }
-
+    
+    // make the jump
     slow->next = slow->next->next;
+    
     return head;
 }
 
