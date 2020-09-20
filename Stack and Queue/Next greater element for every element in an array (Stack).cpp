@@ -13,16 +13,16 @@ int n, m, k;
 void nextGE(int arr[], int ans[])
 {
     stack<int> stk;
-    stk.push(0);
+    stk.push(0);     // we will contain indexes because order matters
 
-    for (int i = 1; i< n; i++) 
+    for (int i = 1; i< n; i++)   // traverse the array
     {
-        while(! stk.empty() && arr[stk.top()] < arr[i])
+        while(! stk.empty() && arr[stk.top()] < arr[i])    // until the top of stack element is smaller than current element
         {
-            ans[stk.top()] = arr[i];
+            ans[stk.top()] = arr[i];                       // set the ans and pop
             stk.pop();
         }
-        stk.push(i);
+        stk.push(i);                                       // push the current element's index
     }
     
     return;
