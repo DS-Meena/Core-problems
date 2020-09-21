@@ -12,21 +12,21 @@ int n, m, k;
 
 int trappedWater(int height[])
 {
-    stack <int> stk;    // stores the indexes with decreasing height
+    stack <int> stk;    
     int maxWater = 0;
 
     for (int curr = 0; curr< n; curr++)
     {
-        while(! stk.empty() && height[curr] > height[stk.top()])   // if current bar height is greater than to be filled bar
+        while(! stk.empty() && height[curr] > height[stk.top()])   // if current bar is longer than in stack bars
         {
-            int top = stk.top();          // pop the to be filled bar
+            int top = stk.top();          // pop the previous smaller bar
             stk.pop();
             
-            if (stk.empty())              // no bar before to be filled bar
+            if (stk.empty())              // if no bar on the left side
                 break;
             
-            int distance = curr - stk.top() - 1;     // calculate amount of water can be filled in to be filled bar
-            int bounded_height = min(height[curr], height[stk.top()]) - height[top];   
+            int distance = curr - stk.top() - 1;     // distance b/w current bar and bar before smaller bar
+            int bounded_height = min(height[curr], height[stk.top()]) - height[top];  // bounded height possible 
             maxWater += distance * bounded_height;
         }
         stk.push(curr);                 // push the index of current bar
