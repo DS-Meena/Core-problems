@@ -15,15 +15,15 @@ int trappedWater(int height[])
     int maxWater = 0;
     int left_mh[n], right_mh[n];
 
-    left_mh[0] = height[0];
+    left_mh[0] = height[0];        // stores maximum height on left side of i
     for (int i = 1; i < n; i++) 
         left_mh[i] = max(height[i], left_mh[i - 1]);
 
-    right_mh[n - 1] = height[n - 1];
+    right_mh[n - 1] = height[n - 1];    // stores maximum height on right side of i
     for (int i = n - 2; i >= 0; i--) 
         right_mh[i] = max(height[i], right_mh[i + 1]);
 
-    for (int i = 1; i < n; i++) 
+    for (int i = 1; i < n; i++)         // for each bar calculate water stored
         maxWater += min(left_mh[i], right_mh[i]) - height[i];
     
     return maxWater;
