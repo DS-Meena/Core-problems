@@ -26,19 +26,19 @@ void mergeIntervals(interval arr[])
 
     for (int i = 1; i < m; i++)
     {
-        if (arr[indx].end < arr[i].start)   
+        if (arr[indx].end < arr[i].start)    // if the intervals do not overlap
         {
-            indx++;                      //save the previous interval
-            arr[indx] = arr[i];
+            indx++;                         // increase indx
+            arr[indx] = arr[i];             // store current interval i at indx
         }
-        else 
+        else                                 // if intervals overlap then merge i with indx
         {
             arr[indx].end = max(arr[indx].end, arr[i].end);
             arr[indx].start = min(arr[indx].start, arr[i].start);
         }
     }
     
-    for (int i = 0;i <= indx; i++) 
+    for (int i = 0;i <= indx; i++)        // merged intervals are upto indx
         cout << arr[i].start << "  " << arr[i].end << endl;
 
     return;
