@@ -28,13 +28,13 @@ void mergeIntervals(interval arr[])
     {
         if (arr[indx].end < arr[i].start)    // if the intervals do not overlap
         {
-            indx++;                         // increase indx
-            arr[indx] = arr[i];             // store current interval i at indx
+            indx++;                         // to safe arr[indx], increase indx
+            arr[indx] = arr[i];             // store i at indx, and check for this
         }
         else                                 // if intervals overlap then merge i with indx
         {
             arr[indx].end = max(arr[indx].end, arr[i].end);
-            arr[indx].start = min(arr[indx].start, arr[i].start);
+            arr[indx].start = min(arr[indx].start, arr[i].start);  // not necessary already sorted
         }
     }
     
