@@ -22,24 +22,24 @@ bool comp(interval a, interval b)
 
 void mergeIntervals(interval arr[])
 {
-    stack <interval> stk;
-    stk.push(arr[0]);
+    stack <interval> stk;     // stack of type interval
+    stk.push(arr[0]);         // push 0th interval
 
     for (int i = 1; i < m; i++)
     {
         interval top = stk.top();
         interval curr = arr[i];
-        if (top.end < curr.start) 
-            stk.push(curr);
+        if (top.end < curr.start)    // if current do not overlap with top
+            stk.push(curr);          // push current
         else 
         {
-            stk.pop();
-            top.end = max(top.end, curr.end);
+            stk.pop();              // otherwise
+            top.end = max(top.end, curr.end);      // adjust top then push
             stk.push(top);
         }
     }
 
-    while(! stk.empty()){
+    while(! stk.empty()){          // remaining intervals in stack are merged intervals
         interval ans = stk.top();
         stk.pop();
         cout << ans.start << " " << ans.end << endl;
@@ -51,8 +51,8 @@ void mergeIntervals(interval arr[])
 void test_case()
 {
     interval arr[] = { {1, 5}, {2, 3}, {4, 8}, {9, 10} }; m = sizeof(arr) / sizeof(arr[0]);
-    sort(arr, arr + m, comp);
-
+    sort(arr, arr + m, comp);     // sort according to start time
+ 
     mergeIntervals(arr); 
     
     cout << endl;
