@@ -12,41 +12,40 @@ int n, m, k;
 
 int largestHG(int height[])
 {
-    stack <int> stk;
-    stk.push(0);
-    int maxArea = 0;
+    stack <int> stk;  // store indexes of bars in increasing order
+    stk.push(0);      // push index of first bar
+    int maxArea = 0; 
 
-    for (int i = 1; i < n; i++)
+    for (int i = 1; i < n; i++)  // Run through all bars 
     {
-        if (height[i] >= height[stk.top()]) 
+        
+        if (height[i] >= height[stk.top()])  // If this bar is higher than the bar on top of stack, then push it
             stk.push(i);
+        // If this bar is lower than top of stack
         else
         {
-            while(! stk.empty() && height[stk.top()] > height[i]) 
+            while(! stk.empty() && height[stk.top()] > height[i])  // Keep calculating area of rectange with top as the smallest
             {
-                int curr = height[stk.top()];
+                int curr = height[stk.top()];   
                 stk.pop();
-                if (stk.empty()) 
+                if (stk.empty())                // width = right index
                     maxArea = max(maxArea, curr * i);
                 else 
-                    maxArea = max(maxArea, curr * (i - stk.top() - 1));
+                    maxArea = max(maxArea, curr * (i - stk.top() - 1));  // width = (right index - left index - 1)
             }
             stk.push(i);
         } 
     }
     
-    if (! stk.empty())
-    {
-        while(! stk.empty())
+    while(! stk.empty())  // until stack not become empty
         {
-            int curr = height[stk.top()];
+            int curr = height[stk.top()];    // Assume curr as smallest and calculate area 
             stk.pop();
-            if (stk.empty()) 
-               maxArea = max(maxArea, curr * n);
+            if (stk.empty())                // widht = n
+               maxArea = max(maxArea, curr * n); 
             else 
-               maxArea = max(maxArea, curr * (n - stk.top() - 1)); 
+               maxArea = max(maxArea, curr * (n - stk.top() - 1));   // Iwidth = n - left index - 1
         }
-    }
     
     return maxArea;
 }
