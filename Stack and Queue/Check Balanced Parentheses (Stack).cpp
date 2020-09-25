@@ -16,25 +16,25 @@ bool isValid(string exp)
 
     for (int i = 0; i < n; i++)     //also works fine in the simple way
     {
-        if (exp[i] == '[' || exp[i] == '(' || exp[i] == '{')
+        if (exp[i] == '[' || exp[i] == '(' || exp[i] == '{')         // if opening bracket then push
             stk.push(exp[i]);
-        else if (exp[i] == ']' || exp[i] == ')' || exp[i] == '}') 
+        else if (exp[i] == ']' || exp[i] == ')' || exp[i] == '}')   // if closing bracket then compare
         {
-            if (stk.empty())  
+            if (stk.empty())                   // no matching the return false
                 return false;
             char ch = stk.top();
             stk.pop();
-            if (ch == '[' && exp[i] == ']') 
+            if (ch == '[' && exp[i] == ']')   // match then pop
                 continue;
             if (ch == '(' && exp[i] == ')') 
                 continue;
             if (ch == '{' && exp[i] == '}')
                 continue;
-            return false;
+            return false;                     // no matching then return false
         }
     }
 
-    if (stk.empty())  
+    if (stk.empty())        // order same then stack will be empty              
         return true;
     return false;
 }
