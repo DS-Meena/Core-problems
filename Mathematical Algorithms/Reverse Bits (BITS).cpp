@@ -15,9 +15,14 @@ int reverseBits(int num)
     int ans = 0;
     while(num > 0)
     {
-        ans = ans << 1;    // muliply by 2
-        if (num & 1 == 1) 
-            ans ^= 1;
+        ans = ans << 1;    // left the previous bits 
+        
+        // int rem = num % 2;  // find the rem
+        // if (rem == 1)       // if remainder is 1 then set the last bit
+        //     ans = ans ^ 1
+        
+        if (num & 1 == 1)       // same
+            ans = ans ^ 1;
         
         num = num >> 1;   // divide by 2 
     }
