@@ -31,7 +31,7 @@ stack<int> sort_Stack(stack <int> *input)  // Bottom top approach
         sort_Stack(input);
         sort_Stack_andInsert(input, data);
     }
-    return *input;
+    return *input;                     // without using return also works fine
 }
 
 void test_case()
