@@ -15,6 +15,15 @@ int gcd(int a, int b)
     if (b == 0) 
         return a;
     return gcd(b, a % b);
+    
+    // while (b != 0) 
+    // {
+    //     int tmp = a; 
+    //     a = b;        // a = b
+    //     b = tmp % b;  // b = a % b
+    // }
+
+    // return a;
 }
 
 void test_case()
