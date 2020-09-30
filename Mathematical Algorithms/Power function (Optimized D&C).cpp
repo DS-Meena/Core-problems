@@ -23,7 +23,7 @@ float power(int base, int expo)
         if (expo > 0) 
             return half_side * half_side * base;
         else 
-            return half_side * half_side / base;
+            return half_side * half_side / base;   // like * (1 / base)
     }
 }
 
