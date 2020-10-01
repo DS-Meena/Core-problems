@@ -36,7 +36,7 @@ int closestP(int num)
     while(! isPalindrome(high))
         high++;
     
-    if (abs(num - low) < abs(num - high)) 
+    if (abs(num - low) <= abs(num - high)) 
         return low;
     return high;
 }
