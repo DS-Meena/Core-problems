@@ -17,16 +17,16 @@ int smallestIRSA(int arr[])  //find peak with 3 conditions also works fine
 
     while (lo < hi)
     {
-        // if array is not rotated or at the drop point
-        if (arr[lo] < arr[hi]) 
-            return arr[lo];
-        
         int mid = lo + (hi - lo)/2;
-        
-        // if middle is greater than rightmost element i.e, before first peak
+
+        // check the condition of first peak
+        if (arr[mid] > arr[mid + 1]) 
+            return arr[mid + 1];
+
+        // if mid is on 2nd ridge
         if (arr[mid] > arr[hi]) 
             lo = mid + 1;
-        // if middle is smaller than rightmost element i.e, before second peak
+        // if mid is on 1st ridge
         else 
             hi = mid;
     }
