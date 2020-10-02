@@ -10,24 +10,34 @@ const int mod = 1e9 + 7;
 
 int n, m, k;
 
-int smallestIRSA(int arr[], int low, int high)  //find peak with 3 conditions also works fine
+int smallestIRSA(int arr[])  //find peak with 3 conditions also works fine
 {
-    while (low < high)
+    int lo = 0;
+    int hi = n - 1;
+
+    while (lo < hi)
     {
-        int mid = low + (high - low) / 2; 
-        if (arr[mid] > arr[mid + 1])    // move towards the peak
-            high = mid;
+        // if array is not rotated or at the drop point
+        if (arr[lo] < arr[hi]) 
+            return arr[lo];
+        
+        int mid = lo + (hi - lo)/2;
+        
+        // if middle is greater than rightmost element i.e, before first peak
+        if (arr[mid] > arr[hi]) 
+            lo = mid + 1;
+        // if middle is smaller than rightmost element i.e, before second peak
         else 
-            low = mid + 1;
+            hi = mid;
     }
 
-    return arr[low + 1];
+    return arr[lo];
 }
 
 void test_case()
 {
     int arr[] = {4, 5, 6, 2, 4};  n = sizeof(arr) / sizeof(arr[0]);
-    cout << smallestIRSA(arr, 0, n - 1); 
+    cout << smallestIRSA(arr); 
         
     cout << endl;
     return;
