@@ -12,9 +12,13 @@ int n, m, k;
 
 int findPeak(int arr[], int low, int high) 
 {
-    while (low < high)
+    while (low < high) 
     {
         int mid = low + (high - low) / 2;   // or check each mid
+        
+        // check the condition of being peak
+        if (arr[mid] > arr[mid - 1] && arr[mid] > arr[mid + 1]) 
+            return mid;
         if (arr[mid] > arr[mid + 1]) 
             high = mid;
         else 
