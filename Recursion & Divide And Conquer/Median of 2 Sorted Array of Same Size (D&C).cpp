@@ -20,6 +20,7 @@ float median(int arr[], int size)
 
 float medianAM(int arr1[], int arr2[], int size)
 {
+    // if problem is small
     if (size <= 0)
        return -1;
     if (size == 1) 
@@ -27,10 +28,25 @@ float medianAM(int arr1[], int arr2[], int size)
     if (size == 2) 
         return double(max(arr1[0], arr2[0]) + min(arr1[1], arr2[1])) / 2;
     
+    // if medians are same
     float med1 = median(arr1, size);
     float med2 = median(arr2, size);
     if (med1 == med2) 
         return med1;
+    
+    // otherwise  divide(shifting) and conqueror
+    int mid;
+    if (size % 2 == 0) 
+        mid = size / 2 - 1;
+    else 
+        mid = size / 2;
+    if (median1 < median2) 
+        return medianAM(arr1 + mid, arr2, size - mid);
+    else 
+        return medianAM(arr1, arr2 + mid, size - mid);
+    
+    // same logic but more code
+    /*
     else if (med1 < med2)
     {
         if (size % 2 == 0)  
@@ -45,6 +61,7 @@ float medianAM(int arr1[], int arr2[], int size)
         else 
             return medianAM(arr2 + size / 2, arr1, size - size / 2);
     }
+    */
 }
 
 void test_case()
