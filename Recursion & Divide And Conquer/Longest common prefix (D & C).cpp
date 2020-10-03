@@ -22,18 +22,19 @@ string common(string a, string b)
     return a.substr(0, smaller);
 }
 
-string longestCP(string arr[], int left, int right)
+string longestCP(string arr[], int start, int end)
 {
-    if (left == right)  
-        return arr[left];
-    else 
-    {
-        int mid = left + (right - left) / 2;
-        string left_lcp = longestCP(arr, left, mid);
-        string right_lcp = longestCP(arr, mid + 1, right);
-        
-        return common(left_lcp, right_lcp);
-    }
+    // if problem is small like one word
+    if (start == end)
+        return arr[start];
+
+    // divide problem into two subproblems 
+    int mid = start + (end - start) / 2;
+    string ans1 = longestCP(arr, start, mid);
+    string ans2 = longestCP(arr, mid + 1, end);
+    
+    // combine the results
+    return common(ans1, ans2);
 }
 
 string LCPdriver(string arr[], int size)
