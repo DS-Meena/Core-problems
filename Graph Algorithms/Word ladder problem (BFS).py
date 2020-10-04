@@ -29,7 +29,7 @@ def shortestPath(start, target, wordDict):
                         frontier.put(tmp) 
                 currLis[pos] = orig_char
 
-            # time complexity O(N)
+            # time complexity O(N * M)
             # for i in range(len(wordDict)):  #check all possible neigbors 
             #     if oneDiff(curr, wordDict[i]) and wordDict[i] not in visited:
             #         frontier.put(wordDict[i]) 
