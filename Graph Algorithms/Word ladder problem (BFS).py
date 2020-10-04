@@ -19,15 +19,15 @@ def shortestPath(start, target, wordDict):
             if curr == target:       # if current is target
                 return level
 
-            currLis = list(curr) 
-            for pos in range(len(currLis)):     # O(M)* 26 check all possible neighbors
-                orig_char = currLis[pos]
-                for c in ascii_lowercase:
-                    currLis[pos] = c
-                    tmp = ''.join(currLis)
-                    if tmp not in visited and tmp in wordDict:  # if not visited and is in wordDict
-                        frontier.put(tmp) 
-                currLis[pos] = orig_char
+            for pos in range(len(curr)):     # O(M)* 26 check all possible neighbors
+                tmp = curr
+                for ch in ascii_lowercase:
+                    curr = list(curr)  # string to list
+                    curr[i] = ch        # push 
+                    curr = ''.join(curr) # list to string
+                    if curr not in visited and curr in wordDict:  # if not visited and is in wordDict
+                        frontier.put(curr) 
+                curr = tmp
 
             # time complexity O(N * M)
             # for i in range(len(wordDict)):  #check all possible neigbors 
