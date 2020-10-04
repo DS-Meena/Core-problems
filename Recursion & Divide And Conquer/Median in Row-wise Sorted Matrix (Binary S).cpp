@@ -22,11 +22,11 @@ int medianRWSM(int mat[][3])
         maxx = max(maxx, mat[i][n - 1]);
     }
 
-    int counter = 0;
     while (minn < maxx)
-    {
-        counter = 0;
+    {        
         int mid = minn + (maxx - minn) / 2;
+        
+        int counter = 0;
         for (int i = 0; i < m; i++)
             counter += upper_bound(mat[i], mat[i] + n, mid) - mat[i];   //no of elements in current row which are <= to mid
  
