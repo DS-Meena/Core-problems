@@ -1,7 +1,8 @@
 
 def dfs(i, graph, visited, stack):
     visited[i] = True
-    stack[i] = True       # same as visited 
+    stack[i] = True       # which are processing
+    
     for j in graph[i]:
         if visited[j] == False:
             if dfs(j, graph, visited, stack) == True:
@@ -9,19 +10,18 @@ def dfs(i, graph, visited, stack):
         elif stack[j] == True and j != i:
             return True
     
-    stack[i] = False     # just make it false after traversing neighbors
+    stack[i] = False     # i is fully processed
     return False
 
-def canFinish(numCourses, prerequisites):
-    graph = [[] for _ in range(numCourses)]   
-    visited = [0 for _ in range(numCourses)]
-    stack = [0 for _ in range(numCourses)]
-
+def canFinish(numCourses, prerequisites):    
     # create graph
+    graph = [[] for _ in range(numCourses)]   
     for pair in prerequisites:
         x, y = pair
         graph[x].append(y)
-
+    
+    visited = [0 for _ in range(numCourses)]
+    stack = [0 for _ in range(numCourses)]
     for i in range(numCourses):
         if  visited[i] == False and dfs(i, graph, visited, stack):   # if cycle found
             print("cycle  found")
