@@ -17,7 +17,7 @@ bool isequal(int arr1[], int arr2[])
     for (int i = 0; i < 5; i++)  map1[arr1[i]]++;
     for (int i = 0; i < 5; i++)  map1[arr2[i]]--; 
 
-    for(auto i: map1){ ;
+    for(auto i: map1){ 
         if( i.second != 0) 
             return false;
     }
