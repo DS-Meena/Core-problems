@@ -14,7 +14,7 @@ struct item
 {
     int value;
     int weight;
-    double ratio;
+    float ratio = (float) value / weight;
 };
 
 bool comp (item a, item b)
@@ -22,43 +22,41 @@ bool comp (item a, item b)
     return a.ratio > b.ratio;
 }
 
-int maxprofit(int items[][2], int capacity)
+int maxprofit(item arr[], int capacity)
 {
-    item arr[n];
-    for (int i =0; i < n;i++){
-        arr[i].value = items[i][0];
-        arr[i].weight = items[i][1];
-        arr[i].ratio = double(items[i][0]/items[i][1]);
-    } 
-    sort(arr, arr+n, comp); 
+    // sort the items according to their ratio
+    sort(arr, arr + n, comp);
+    int remCapacity = capacity, currValue = 0, currItem = 0; 
     
-    double totalValue = 0.0;
-    int currUsedWeight = 0;
-    for (int i =0; i < n; i++){
-        if (currUsedWeight +  arr[i].weight <= capacity)
+    // while remaining capacity is greater than 0
+    while (remCapacity > 0)
+    {
+        // if can take whole item
+        if (remCapacity >= arr[currItem].weight)
         {
-            totalValue += arr[i].value;
-            currUsedWeight += arr[i].weight; 
+            currValue += arr[currItem].value;
+            remCapacity -= arr[currItem].weight;
+            currItem++;
         }
+
+        // if can not take whole item
         else
-        { 
-            int availableSpace = capacity - currUsedWeight; 
-            // taking the fraction
-            totalValue += arr[i].ratio * availableSpace;
-            break;
+        {
+            currValue += remCapacity * arr[currItem].ratio;
+            remCapacity = 0;
         }
     }
 
-    return totalValue;
+    // return total value obtained
+    return currValue;
 }
 
 void test_case()
 { 
-    int items[][2] = {{60, 10}, {100, 20}, {120, 30}};
-    n = sizeof(items)/sizeof(items[0]);
-    int capacity = 50; 
-    int ans = maxprofit(items, capacity);
-    cout << ans; 
+    item arr[] = {{60, 10}, {100, 20}, {120, 30}};   n = sizeof(arr) / sizeof(arr[0]);
+    int capacity = 50;
+    
+    cout << maxprofit(arr, capacity);  
 
     cout << endl;
     return;
