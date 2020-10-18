@@ -14,23 +14,33 @@ void printSOT(int mat[][4])
 {
     int SR = 0, ER = n - 1, SC = 0, EC = n - 1;
 
-    while (ER > SR && EC > SC)
+    while (ER >= SR && EC >= SC)
     {
+        // left to right
         for (int i = SC; i <= EC; i++) 
             cout << mat[SR][i] << " ";
         SR++; 
-
+        
+        // top to bottom
         for (int i = SR; i <= ER; i++) 
             cout << mat[i][EC] << " ";
         EC--;  
-
-        for (int i = EC; i >= SC; i--) 
-            cout << mat[ER][i] << " ";
-        ER--;   
-
-        for (int i = ER; i >= SR; i--) 
-            cout << mat[i][SC] << " ";
-        SC++;   
+        
+        // left to right
+        if (SR <= ER)   // if row starting is less than or equal to row ending
+        {
+            for (int i = EC; i >= SC; i--) 
+                cout << mat[ER][i] << " ";
+            ER--; 
+        }
+        
+        // bottom to top
+        if (SC <= EC)    // if col starting is less than or equal to col ending
+        {
+            for (int i = ER; i >= SR; i--) 
+                cout << mat[i][SC] << " ";
+            SC++;  
+        }
     }
 
     return;
