@@ -26,7 +26,7 @@ void printSOT(int mat[][4])
             cout << mat[i][EC] << " ";
         EC--;  
         
-        // left to right
+        // right to left
         if (SR <= ER)   // if row starting is less than or equal to row ending
         {
             for (int i = EC; i >= SC; i--) 
