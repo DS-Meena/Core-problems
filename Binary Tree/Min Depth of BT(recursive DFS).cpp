@@ -35,6 +35,10 @@ int minDepth(node* root)
     int left_depth = minDepth(root->left);
     int right_depth = minDepth(root->right);
     
+    if (! root->left)  // if left is null
+        return right_depth + 1;
+    if (! root->right)  // if right is null
+        return left_depth + 1;
 
     return min(left_depth, right_depth) + 1;
 }
