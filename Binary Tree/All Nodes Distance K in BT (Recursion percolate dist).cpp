@@ -44,26 +44,26 @@ int K_Dist_nodes(node* root, int k)
     if (root == NULL)  return -1;
     if (root == target) {
         k_Dist_down(root, k);
-        return 0;
+        return 1;
     } 
 
     int left_dis = K_Dist_nodes(root->left, k);  //search left
     if (left_dis != -1)
     {
-        if (left_dis + 1 == k) 
+        if (left_dis == k) 
             cout << root->key << " ";
         else 
-            k_Dist_down(root->right, k - left_dis - 2);  // in right subtree with less dist
+            k_Dist_down(root->right, k - left_dis - 1);  // in right subtree with less dist
         return 1 + left_dis;
     } 
 
     int right_dis = K_Dist_nodes(root->right, k);  //search right
     if (right_dis != -1)
     {
-        if (right_dis + 1 == k)
+        if (right_dis == k)
             cout << root->key << " ";
         else 
-            k_Dist_down(root->left, k - right_dis - 2);   // in left subtree with less dist
+            k_Dist_down(root->left, k - right_dis - 1);   // in left subtree with less dist
         return 1 + right_dis;
     }
     return -1;
