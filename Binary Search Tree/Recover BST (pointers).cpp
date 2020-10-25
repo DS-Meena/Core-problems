@@ -46,26 +46,31 @@ void inOrder(node* root)
     inOrder(root->right);
 }
 
-void recover(node *root, node **first, node **middle, node **last, node **prev)
+node* first = NULL;
+node* middle = NULL;
+node* last = NULL:
+node* prev = NULL;
+
+void recover(node *root)
 {
     if (! root)
         return;
         
-    recover(root->left, first, middle, last, prev);
+    recover(root->left);
 
-    if (*prev && root->key < (*prev)->key)
+    if (prev && root->key < prev->key)
     {
-        if (!*first)
+        if (! first)
         {
-            *first = *prev;
-            *middle = root;
+            first = prev;
+            middle = root;
         }
         else
-            *last = root;
+            last = root;
     }
-    *prev = root;
+    prev = root;
 
-    recover(root->right, first, middle, last, prev);
+    recover(root->right);
 }
 
 void test_case()
@@ -78,10 +83,8 @@ void test_case()
     swap(root->left->right, root->right);  
     
     inOrder(root); cout << endl;
-    node *first, *middle, *last, *prev;
-    first = middle = last = prev = NULL;
 
-    recover(root, &first, &middle, &last, &prev);   // find swapped nodes
+    recover(root);   // find swapped nodes
 
     if (first && last)
         swap((first->key), (last->key));
