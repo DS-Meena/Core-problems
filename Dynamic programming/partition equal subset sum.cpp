@@ -12,32 +12,37 @@ int n;
 
 bool canPartitioned(int arr[])
 {
-    int sum = 0;
-    for (int i = 0; i < n; i++) 
-        sum += arr[i];
-    
-    if (sum % 2 != 0) 
-        return false;
-    
-    bool sums[sum/ 2 + 1][n + 1]; 
-    
-    for (int i =0; i <= sum / 2; i++){
-        for (int j = 0; j <= n ; j++)
+        int sum = 0;
+        for (int i = 0; i< n; i++)
+            sum += arr[i];
+        
+        if (sum % 2 != 0)
+            return false;
+        
+        // create a sum array
+        bool cando[sum / 2 + 1][n + 1];
+        
+        // initialization 
+        // 0 elements not possible
+        for (int i = 0; i <= sum / 2; i++)
+            cando[i][0] = false;
+        
+        // 0 sum always possible
+        for (int i = 0; i <= n; i++)
+            cando[0][i] = true;
+        
+        for (int s = 1; s <= sum / 2; s++)
         {
-            if (i == 0)    // 0 sum is always possible
-                sums[i][j] = true; 
-            else if (j == 0)       // not possible with empty set
-                sums[i][j] = false;      
-            else
+            for (int j = 1; j <= n; j++)
             {
-                sums[i][j] = sums[i][j - 1];
-                if (i >= arr[j - 1])             // sum greater than curr_element
-                    if (sums[i][j] || sums[i - arr[j - 1]][j - 1])      //true if lesser sum's cell is true
-                        sums[i][j] = true;
-            }       
+                cando[s][j] = cando[s][j - 1];
+                if (s >= arr[j - 1])    // sum greater than current element
+                    if (cando[s][j] || cando[s - arr[j - 1]][j - 1])   // true if lessers sum's cell is true
+                        cando[s][j] = true;
+            }
         }
-    }
-    return sums[sum / 2][n];
+        
+        return cando[sum/2][n];
 }
 
 void test_case()
