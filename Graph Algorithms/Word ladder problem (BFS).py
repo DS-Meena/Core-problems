@@ -21,9 +21,10 @@ def shortestPath(start, target, wordDict):
 
             for pos in range(len(curr)):     # O(M)* 26 check all possible neighbors
                 tmp = curr
-                for ch in ascii_lowercase:
+                #  or also can use lower case alphabets list
+                for ch in ascii_lowercase: 
                     curr = list(curr)  # string to list
-                    curr[i] = ch        # push 
+                    curr[pos] = ch        # push 
                     curr = ''.join(curr) # list to string
                     if curr not in visited and curr in wordDict:  # if not visited and is in wordDict
                         frontier.put(curr) 
