@@ -9,68 +9,85 @@ const int N = 100;
 const int mod = 1e9 + 7;
 
 int n, m;
-#define MAX 122              //max ascii value of alphabet 'z'
+vector<string> ans;
+#define MAX 26              
 #define MAX_WORD_LEN 500
 
-struct trieNode {    
-    int freq;
-    trieNode* child[MAX];
-};
-
-trieNode* newTrieNode(){
-    trieNode* NTN = new trieNode;
-    NTN->freq = 1;
-    for (int i = 0; i< MAX; i++) 
-        NTN->child[i] = NULL;
-    return NTN;
-}
-
-void insert(trieNode* root, string s)
-{
-    for (int level = 0; level < s.length(); level++)
-    {
-        int indx = s[level];        // taking child as a integer
-        if (! root->child[indx]) 
-            root->child[indx] = newTrieNode();
-        else 
-            root->child[indx]->freq += 1;
-        root = root->child[indx];
-    }
-}
-
-void findPrefixes(trieNode* root, char prefix[], int indx)
-{
-    if (root == NULL) 
-       return;
+    // Trie Node
+    struct node {
+        int freq;
+        bool end;
+        node* child[MAX];  // main
+    };
     
-    if (root->freq == 1)     // print upto freq 1 from root
+    // create a new node 
+    node* newnode() 
     {
-        prefix[indx] = '\0';     
-        cout << prefix << " ";
-        return;
+        node* NTN = new node;
+        
+        NTN->freq = 0;
+        NTN->end = false;
+        for (int i = 0; i < MAX; i++)   // main
+            NTN->child[i] = NULL;
+        
+        return NTN;
     }
-    for (int i = 0; i< MAX; i++){
-        if (root->child[i] != NULL)
+
+    // insert a node
+    void insert(node* root, string s)
+    {
+        node* tmp = root;
+        int len = s.size();
+        
+        for (int i = 0; i < len; i++)
         {
-            prefix[indx] = i;
-            findPrefixes(root->child[i], prefix, indx + 1); 
+            int indx = s[i] - 'a';   
+            if (! tmp->child[indx]) 
+                tmp->child[indx] = newnode();
+            
+            tmp = tmp->child[indx];
+            tmp->freq++;
         }
+        
+        tmp->end = true;
     }
-}
+
+    // search string
+    string search(node* root, string key)
+    {
+        string res;
+        node* tmp = root;
+        
+        int len = key.length();
+        for (int i = 0; i < len; i++)
+        {
+            res.push_back(key[i]);
+            tmp = tmp->child[key[i] - 'a'];
+            if (tmp->freq == 1)
+                break;
+        }
+        
+        return res;
+    }
 
 void test_case()
 {
-    string arr[] = {"alphabet", "carpet", "cartoon", "carrot", "alpine"};
-    n = sizeof(arr) / sizeof(arr[0]);
+    vector<string> arr = {"alphabet", "carpet", "cartoon", "carrot", "alpine"};
+        // write your awesome code here
+        n = arr.size();
+        
+        // construct a trie of all words
+        node* root = newnode();       
 
-    trieNode* root = newTrieNode();
-    root->freq = 0;
-    for (int i = 0; i < n; i++)
-        insert(root, arr[i]);
-    char prefix[MAX_WORD_LEN];
+        for (int i = 0; i < n; i++)   // insert all strings
+            insert(root, arr[i]);
+        
+        for (int i = 0; i < n; i++)   // search all strings
+            ans.push_back(search(root, arr[i]));
+
+    for (string i: ans)
+        cout << i << " ";
     
-    findPrefixes(root, prefix, 0);
-
     cout << endl;
     return;
 }
