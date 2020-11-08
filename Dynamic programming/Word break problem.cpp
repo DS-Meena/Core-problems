@@ -33,21 +33,26 @@ bool canBreaked(string str)
 
     for (int i = 1; i <= curr_size; i++)
     {
-        if (dictionaryContains(str.substr(0, i)) &&   // check prefix if not checked before
-            contains[i] == false)
-            contains[i] = true;
-
-        if (contains[i] == true)                          // if contains prefix
+        // if contains prefix
+        if (contains[i] == false && dictionaryContains(str.substr(0, i)))   // check prefix if not checked before
         {
-            if (i == curr_size)
+            contains[i] = true;
+            
+            // prefix to end
+            if (i == curr_size)  
                 return true;
+            
+            // if contains suffix
             for (int j = i + 1; j <= curr_size; j++)  // check all suffixes
             {
                 if (contains[j] == false && dictionaryContains(str.substr(i, j - i))) 
+                {
                     contains[j] = true;
-                
-                if (j == curr_size && contains[j] == true) 
-                    return true;
+                    
+                    // suffix to end
+                    if (j == curr_size) 
+                        return true;
+                }
             }
         }
     }
