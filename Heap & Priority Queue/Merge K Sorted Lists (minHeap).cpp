@@ -34,10 +34,14 @@ struct compare
 node* mergeKSL(node* arr[])
 {
     priority_queue <node*, vector <node*> , compare > minHeap;
-    minHeap.push(arr[0]);
-    minHeap.push(arr[1]);
-    minHeap.push(arr[2]);
-
+//     minHeap.push(arr[0]);   // their are k ll not 3
+//     minHeap.push(arr[1]);
+//     minHeap.push(arr[2]);
+    
+    // push all k nodes into it
+    for (int i = 0; i < n; i++)
+        minHeap.push(arr[i]);
+    
     node* head = NULL;
     node* tmp;       
     while(! minHeap.empty())
