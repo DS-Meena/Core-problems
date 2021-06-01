@@ -30,6 +30,9 @@ int minCuts(string s, int i, int j)     /// similar to matrix chain multiplicati
     for (int k = i; k < j; k++)
     {
         int cuts = minCuts(s, i, k) + minCuts(s, k + 1, j) + 1;
+        // or using sub string instead of i and j.      //CAN ALSO TRY THIS
+        // minCuts(curr_string, index)
+        // mincuts(s.substr(0, i), 0) + mincuts(s.substr(i+1, s.size()-i), 0) + 1;   
         
         // string prefix = s.substr(0, i);             // by using prefix and suffix
         // string suffix = s.substr(i, size - i);      
